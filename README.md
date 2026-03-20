@@ -16,7 +16,7 @@ Este projeto foi desenvolvido com o objetivo de praticar desenvolvimento front-e
 
 - Estruturação semântica com HTML
 - Estilização moderna com CSS
-- Design responsivo com CSS
+- Design responsivo para desktop com CSS
 
 ## ✨ Funcionalidades
 
