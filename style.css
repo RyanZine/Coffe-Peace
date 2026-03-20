@@ -60,24 +60,26 @@ header section {
   align-items: center;
   justify-content: flex-start;
   gap: 50px;
-  padding:1.5rem 0;
+  padding: 1.5rem 0;
   position: relative;
 }
 
 header section a img {
-height: 6rem;
+  height: 6rem;
 }
 
 header section nav a {
   margin: 0 1rem;
   font-size: 1.8rem;
   color: #fff;
+  transition: color 0.25s ease, border-bottom-color 0.25s ease, padding-bottom 0.25s ease;
 }
 
 header section nav a:hover {
   color: var(--main-color);
   border-bottom: 0.1rem solid var(--main-color);
   padding-bottom: 0.5rem;
+
 }
 
 section.caixa-principal {
@@ -91,7 +93,7 @@ section.caixa-principal div {
 }
 
 section.caixa-principal div h3 {
-  color:#fff;
+  color: #fff;
   font-size: 6rem;
   text-transform: uppercase;
 }
@@ -131,7 +133,7 @@ section.caixa-sobre h2 span {
 
 }
 
-section.caixa-sobre div.sobre-container{
+section.caixa-sobre div.sobre-container {
   display: flex;
   align-items: center;
   background-color: var(--black);
@@ -144,11 +146,11 @@ section.caixa-sobre div.sobre-container div.sobre-imagem {
 }
 
 section.caixa-sobre div.sobre-container div.sobre-imagem img {
-  width:100%;
+  width: 100%;
 }
 
 section.caixa-sobre div.sobre-container div.sobre-texto h3 {
-  font-size:3rem;
+  font-size: 3rem;
   color: #fff;
 }
 
@@ -161,7 +163,7 @@ section.caixa-sobre div.sobre-container div.sobre-texto p {
 }
 
 footer {
-   background-color: var(--bg);
+  background-color: var(--bg);
   border-top: var(--border);
   text-align: center;
   padding: 2rem;
@@ -194,8 +196,8 @@ section.caixa-sobre div.sobre-container div.sobre-texto {
     flex-direction: column;
     gap: 2rem;
   }
+
   section.caixa-sobre div.sobre-container div.sobre-texto {
     padding-left: 0;
   }
 }
-
