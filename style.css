@@ -1,0 +1,188 @@
+:root {
+  font-size: 10px;
+  --main-color: #d3ad7f;
+  --black: #131313;
+  --bg: #010103;
+  --border: 0.1rem solid rgba(255, 255, 255, 0.3);
+}
+
+
+/*reset*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+div.caixa-video {
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+div.caixa-video video {
+  min-height: 100%;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+}
+
+div.mascara {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: #313738;
+  background: linear-gradient(90deg, rgba(49, 55, 56, 0.63) 0%, rgba(49, 55, 56, 0.64) 100%);
+}
+
+section {
+  padding: 3rem 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--bg);
+  border-bottom: var(--border);
+  width: 100vw;
+}
+
+header section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  padding:1.5rem 0;
+  position: relative;
+}
+
+header section a img {
+height: 6rem;
+}
+
+header section nav a {
+  margin: 0 1rem;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+header section nav a:hover {
+  color: var(--main-color);
+  border-bottom: 0.1rem solid var(--main-color);
+  padding-bottom: 0.5rem;
+}
+
+section.caixa-principal {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+section.caixa-principal div {
+  max-width: 60rem;
+}
+
+section.caixa-principal div h3 {
+  color:#fff;
+  font-size: 6rem;
+  text-transform: uppercase;
+}
+
+section.caixa-principal div p {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: lighter;
+  padding: 1rem 0;
+  line-height: 1.8;
+}
+
+a.botao-link {
+  background-color: var(--main-color);
+  cursor: pointer;
+  margin-top: 2rem;
+  display: inline-block;
+  font-size: 1.7rem;
+  color: #fff;
+  padding: 1rem 3rem;
+}
+
+section.caixa-principal div a:hover {
+  letter-spacing: 0.1rem;
+}
+
+section.caixa-sobre h2 {
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 3.5rem;
+  font-size: 4rem;
+}
+
+section.caixa-sobre h2 span {
+  color: var(--main-color);
+
+}
+
+section.caixa-sobre div.sobre-container{
+  display: flex;
+  align-items: center;
+  background-color: var(--black);
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-imagem {
+  flex: 1 1 45rem;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-imagem img {
+  width:100%;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-texto h3 {
+  font-size:3rem;
+  color: #fff;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-texto p {
+  font-size: 1.5rem;
+  font-weight: lighter;
+  color: #fff;
+  line-height: 1.8;
+  padding: 1rem 0;
+}
+
+/* keep imagem left and texto right */
+section.caixa-sobre div.sobre-container {
+  justify-content: space-between;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-imagem {
+  order: 1;
+}
+
+section.caixa-sobre div.sobre-container div.sobre-texto {
+  flex: 1 1 45rem;
+  order: 2;
+  padding-left: 2rem;
+}
+
+/* responsive adjustment */
+@media (max-width: 768px) {
+  section.caixa-sobre div.sobre-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  section.caixa-sobre div.sobre-container div.sobre-texto {
+    padding-left: 0;
+  }
+}
+
