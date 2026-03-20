@@ -160,6 +160,19 @@ section.caixa-sobre div.sobre-container div.sobre-texto p {
   padding: 1rem 0;
 }
 
+footer {
+   background-color: var(--bg);
+  border-top: var(--border);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+footer p {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
 /* keep imagem left and texto right */
 section.caixa-sobre div.sobre-container {
   justify-content: space-between;
