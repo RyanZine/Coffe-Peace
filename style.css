@@ -114,10 +114,12 @@ a.botao-link {
   font-size: 1.7rem;
   color: #fff;
   padding: 1rem 3rem;
+  transition: all 0.3s ease;
 }
 
-section.caixa-principal div a:hover {
+a.botao-link:hover {
   letter-spacing: 0.1rem;
+  transform: scale(1.05);
 }
 
 section.caixa-sobre h2 {
@@ -162,6 +164,138 @@ section.caixa-sobre div.sobre-container div.sobre-texto p {
   padding: 1rem 0;
 }
 
+section.catalogo h2 {
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 3.5rem;
+  font-size: 4rem;
+}
+
+section.catalogo h2 span {
+  color: var(--main-color);
+}
+
+section.catalogo div.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+}
+
+article.produto {
+  text-align: center;
+  background-color: var(--black);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+article.produto h3 {
+  color: #fff;
+  font-size: 2.5rem;
+  padding: 1rem 0;
+}
+
+article.produto img {
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+article.produto p.preco {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem 0;
+}
+
+article.produto button.add {
+  background-color: var(--main-color);
+  cursor: pointer;
+  margin-top: 2rem;
+  display: inline-block;
+  font-size: 1.7rem;
+  color: #fff;
+  padding: 1rem 3rem;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+article.produto button.add:hover {
+  transform: scale(1.05);
+  letter-spacing: 0.1rem;
+}
+
+article.produto button.next {
+  background-color: var(--main-color);
+  cursor: pointer;
+  margin-top: 2rem;
+  display: inline-block;
+  font-size: 1.7rem;
+  color: #fff;
+  padding: 1rem 3rem;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+article.produto button.next:hover {
+  transform: scale(1.05);
+  letter-spacing: 0.1rem;
+}
+
+section.carrinho {
+  background-color: var(--black);
+  border: var(--border);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+}
+
+section.carrinho h2 {
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 3.5rem;
+  font-size: 4rem;
+}
+
+ul#lista-carrinho {
+  list-style: none;
+  padding: 0;
+}
+
+ul#lista-carrinho button {
+  background-color: var(--main-color);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  border-radius: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+ul#lista-carrinho button:hover {
+  letter-spacing: 0.1rem;
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+p#total {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  border-top: var(--border);
+  padding-top: 1rem;
+}
+
+span.item-info {
+  color: #fff;
+  font-size: 1.5rem;
+  flex: 1;
+}
+
+
 footer {
   background-color: var(--bg);
   border-top: var(--border);
@@ -199,5 +333,74 @@ section.caixa-sobre div.sobre-container div.sobre-texto {
 
   section.caixa-sobre div.sobre-container div.sobre-texto {
     padding-left: 0;
+  }
+
+  section.caixa-principal div h3 {
+    font-size: 4rem;
+  }
+
+  section.caixa-principal div p {
+    font-size: 1.5rem;
+  }
+
+  a.botao-link {
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
+  }
+
+  article.produto button.add,
+  article.produto button.next {
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
+  }
+
+  ul#lista-carrinho button {
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section.caixa-principal div h3 {
+    font-size: 3rem;
+  }
+
+  section.caixa-principal div p {
+    font-size: 1.3rem;
+  }
+
+  section.caixa-sobre h2,
+  section.catalogo h2,
+  section.carrinho h2 {
+    font-size: 2.5rem;
+  }
+
+  article.produto h3 {
+    font-size: 2rem;
+  }
+
+  article.produto p.preco {
+    font-size: 1.5rem;
+  }
+
+  a.botao-link,
+  article.produto button.add,
+  article.produto button.next {
+    font-size: 1.3rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  ul#lista-carrinho button {
+    font-size: 1rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  header section nav a {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+  }
+
+  header section a img {
+    height: 4rem;
   }
 }
