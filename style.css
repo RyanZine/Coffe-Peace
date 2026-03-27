@@ -1,3 +1,4 @@
+/* Variáveis CSS globais para tema de cores e escalas */
 :root {
   font-size: 10px;
   --main-color: #d3ad7f;
@@ -7,7 +8,7 @@
 }
 
 
-/*reset*/
+/* Reset básico para consistência entre navegadores */
 * {
   margin: 0;
   padding: 0;
@@ -83,7 +84,7 @@ header section nav a:hover {
 }
 
 section.caixa-principal {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
 }
@@ -240,6 +241,97 @@ article.produto button.next {
 article.produto button.next:hover {
   transform: scale(1.05);
   letter-spacing: 0.1rem;
+}
+
+#carrinho-lateral {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  /* escondido */
+  width: 300px;
+  height: 100dvh;
+  background: #fff;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+#carrinho-lateral.ativo {
+  right: 0;
+  /* aparece */
+}
+
+.carrinho-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button#abrir-carrinho {
+  background-color: var(--main-color);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  border-radius: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+button#abrir-carrinho:hover {
+  letter-spacing: 0.1rem;
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+button#fechar-carrinho {
+  background-color: var(--main-color);
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  border-radius: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+#finalizar-compra {
+  width: 100%;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+#finalizar-compra:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 section.carrinho {

@@ -1,47 +1,64 @@
- <!DOCTYPE html>
- <html lang="pt-br">
- <head>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Metadados de codificação e viewport para responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Pré-carregando fontes Google para performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Importa as fontes usadas no estilo do site -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Ícone do site (favicon) -->
     <link rel="icon" href="img/logo.png" type="img/png">
+
+    <!-- CSS principal -->
     <link rel="stylesheet" href="style.css">
     <title>EnergyPeace Café</title>
- </head>
- <body>
-    <!--imagem de fundo-->
+</head>
+
+<body>
+    <!-- container do vídeo de fundo e máscara de efeito -->
     <div class="caixa-video">
-        <video src="videos/background.mp4" autoplay loop muted></video>
-        <!--mascara de efeito-->
-        <div class="mascara"></div>
-    </div>
-    <!--cabeçalho-->
-    <header>
-        <section>
-            <!--logo-->
-            <a href="#">
-                <img src="img/logo.png" alt="logo-cafeteria">
-            </a>
-            <!--menu-->
-            <nav>
-                <a href="#">Home</a>
-                <a href="#sobre">Sobre</a>
-                <a href="#produtos">Produtos</a>
-            </nav>
-        </section>
-    </header>
-<!--texto introdução-->
+        <div class="caixa-video">
+            <!-- vídeo em loop de fundo do site -->
+            <video src="videos/background.mp4" autoplay loop muted></video>
+            <!-- máscara semitransparente para efeito visual sobre o vídeo -->
+            <div class="mascara"></div>
+        </div>
+
+        <!-- cabeçalho principal com logo e navegação âncora -->
+        <header>
+            <section>
+                <!-- logo clicável retorna ao topo -->
+                <a href="#">
+                    <img src="img/logo.png" alt="logo-cafeteria">
+                </a>
+                <!-- links de navegação interna -->
+                <nav>
+                    <a href="#">Home</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#catalogo">Produtos</a>
+                </nav>
+            </section>
+        </header>
+
+        <!-- seção principal de destaque com chamada para ação -->
         <section class="caixa-principal">
             <div>
                 <h3>O Melhor Café da Região</h3>
                 <p>Experimente os momentos do dia com a vibe enérgica ou acalmante para evitar o estresse</p>
-                <a href="#" class="botao-link">Pague o seu agora</a>
+                <a href="#catalogo" class="botao-link">Pegue o seu agora</a>
             </div>
         </section>
-<!--sobre nós (titulo em duas cores)-->
-            <section class="caixa-sobre" id="sobre">
+        <!-- seção "Sobre Nós" com imagem e texto institucional -->
+        <section class="caixa-sobre" id="sobre">
             <h2><span>Sobre</span> Nós</h2>
             <div class="sobre-container">
                 <div class="sobre-imagem">
@@ -50,15 +67,18 @@
 
                 <div class="sobre-texto">
                     <h3>O que faz o nosso café especial</h3>
-                    <p>A mistura entre um momento único ou uma rotina agitada sem perder o gosto, qualidade e a energia que a cafeína pode proporcionar.</p>
-                    <p>Apreciamos momentos de calma com chá para desascelerar, relaxar e apreciar o momento com a mente mais tranquila.</p>
+                    <p>A mistura entre um momento único ou uma rotina agitada sem perder o gosto, qualidade e a energia
+                        que a cafeína pode proporcionar.</p>
+                    <p>Apreciamos momentos de calma com chá para desascelerar, relaxar e apreciar o momento com a mente
+                        mais tranquila.</p>
                     <a href="#" class="botao-link">Saiba Mais</a>
                 </div>
 
             </div>
         </section>
-        <!--produtos-->
-        <section class="catalogo">
+
+        <!-- seção de catálogo de produtos com cards e botão adicionar ao carrinho -->
+        <section class="catalogo" id="catalogo">
             <h2>Nossos <span>Cafés</span></h2>
             <div class="produtos">
 
@@ -97,19 +117,41 @@
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
             </div>
-            </section>
+        </section>
 
-            <!--carrinho-->
+        <!-- botão que abre o painel do carrinho lateral -->
+        <button id="abrir-carrinho">🛒</button>
+
+        <!-- painel do carrinho lateral (overlay) -->
+        <div id="carrinho-lateral">
+            <div class="carrinho-header">
+                <h2>Seu Carrinho</h2>
+                <button id="fechar-carrinho">✖</button> <!-- fecha o painel lateral -->
+            </div>
+
+            <!-- campos do carrinho: lista de itens + total + finalizar compra -->
             <section class="carrinho">
                 <h2>Carrinho</h2>
 
+                <!-- itens adicionados dinamicamente pelo script -->
                 <ul id="lista-carrinho"></ul>
 
+                <!-- total atualizado automaticamente -->
                 <p id="total">Total: R$0,00</p>
+                <button id="finalizar-compra">Finalizar Compra</button>
             </section>
+        </div>
+
+        <!-- elemento toast usado para mensagens rápidas ao usuário -->
+        <div id="toast" class="toast">Mensagem</div>
+
+        <!-- rodapé do site -->
         <footer>
             <p>Copyright © 2026 EnergyPeace Café. Todos os direitos reservados.</p>
         </footer>
-         <script src="script.js"></script>
- </body>
- </html>    
+
+        <!-- script principal que controla carrinho e interações -->
+        <script src="script.js"></script>
+</body>
+
+</html>
