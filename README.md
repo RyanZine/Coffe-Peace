@@ -7,7 +7,7 @@ Uma landing page moderna e interativa com foco em experiência do usuário, desi
 ## 🚀 Demonstração
 
 🔗 **Projeto Online:**  
-https://SEU-LINK-VERCEL.vercel.app  
+https://coffe-peace.vercel.app  
 
 💻 **Repositório:**  
 https://github.com/RyanZine/Coffe-Peace  
