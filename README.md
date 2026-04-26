@@ -1,4 +1,4 @@
-# ☕ Coffee Peace
+# ☕ Energy Peace
 
 Uma landing page moderna e interativa com foco em experiência do usuário, design minimalista e simulação de funcionalidades de e-commerce no front-end.
 
