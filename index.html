@@ -5,6 +5,22 @@
     <!-- Metadados de codificação e viewport para responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
+    <meta name="author" content="Ryan Zinedine">
+    <link rel="canonical" href="https://coffe-peace.vercel.app/">
+
+    <!-- Open Graph / redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://coffe-peace.vercel.app/">
+    <meta property="og:title" content="EnergyPeace Café — Cafeteria artesanal">
+    <meta property="og:description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
+    <meta property="og:image" content="https://coffe-peace.vercel.app/img/logo.png">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EnergyPeace Café — Cafeteria artesanal">
+    <meta name="twitter:description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
+    <meta name="twitter:image" content="https://coffe-peace.vercel.app/img/logo.png">
 
     <!-- Pré-carregando fontes Google para performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +45,7 @@
     <!-- container do vídeo de fundo e máscara de efeito -->
     <div class="caixa-video">
             <!-- vídeo em loop de fundo do site -->
-            <video src="videos/background.mp4" autoplay loop muted></video>
+            <video poster="videos/poster.jpg" preload="metadata" playsinline src="videos/background.mp4" autoplay loop muted></video>
             <!-- máscara semitransparente para efeito visual sobre o vídeo -->
             <div class="mascara"></div>
         </div>
@@ -63,7 +79,7 @@
             <h2><span>Sobre</span> Nós</h2>
             <div class="sobre-container">
                 <div class="sobre-imagem">
-                    <img src="img/about-img.jpg" alt="Sobre Nós">
+                    <img loading="lazy" decoding="async" src="img/about-img.jpg" alt="Sobre Nós">
                 </div>
 
                 <div class="sobre-texto">
@@ -85,35 +101,35 @@
 
                 <article class="produto">
                     <h3>Café Expresso</h3>
-                    <img src="img/cafe_expresso.png" alt="Café Expresso">
+                    <img loading="lazy" decoding="async" src="img/cafe_expresso.png" alt="Café Expresso">
                     <p class="preco">R$ 5,00</p>
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
 
                 <article class="produto">
                     <h3>Café Mocha</h3>
-                    <img src="img/cafe_mocha.png" alt="Café Mocha">
+                    <img loading="lazy" decoding="async" src="img/cafe_mocha.png" alt="Café Mocha">
                     <p class="preco">R$ 7,00</p>
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
 
                 <article class="produto">
                     <h3>Cappuccino</h3>
-                    <img src="img/cappuccino.png" alt="Café Cappuccino">
+                    <img loading="lazy" decoding="async" src="img/cappuccino.png" alt="Café Cappuccino">
                     <p class="preco">R$ 8,00</p>
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
 
                 <article class="produto">
                     <h3>Latte</h3>
-                    <img src="img/latte.png" alt="Café Latte">
+                    <img loading="lazy" decoding="async" src="img/latte.png" alt="Café Latte">
                     <p class="preco">R$ 9,00</p>
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
 
                 <article class="produto">
                     <h3>Macchiato</h3>
-                    <img src="img/macchiato.png" alt="Café Macchiato">
+                    <img loading="lazy" decoding="async" src="img/macchiato.png" alt="Café Macchiato">
                     <p class="preco">R$ 10,00</p>
                     <button class="add">Adicionar ao Carrinho</button>
                 </article>
