@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" role="img" aria-label="EnergyPeace Café">
+  <defs>
+    <linearGradient id="cpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1c1a18"/><stop offset="1" stop-color="#010103"/>
+    </linearGradient>
+  </defs>
+  <rect width="760" height="200" rx="24" fill="url(#cpBg)"/>
+  <circle cx="118" cy="100" r="62" fill="none" stroke="#d3ad7f" stroke-width="2" stroke-opacity=".35"/>
+  <g transform="translate(118,100)" stroke="#d3ad7f" fill="none" stroke-linecap="round">
+    <path d="M-14-38C-22-30-22-24-14-16M0-40C-8-32-8-26 0-18M14-38C6-30 6-24 14-16" stroke-width="4" stroke-opacity=".75"/>
+    <path d="M-30-4h48v14a24 24 0 0 1-24 24 24 24 0 0 1-24-24Z" fill="#d3ad7f" stroke="none"/>
+    <path d="M20 2h8a11 11 0 0 1 0 22h-8" stroke-width="5"/>
+    <path d="M-36 40h58" stroke-width="5"/>
+  </g>
+  <text x="232" y="92" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="48" font-weight="300" fill="#f5efe6" letter-spacing="1">Energy<tspan font-weight="700" fill="#d3ad7f">Peace</tspan></text>
+  <text x="234" y="130" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="18" font-weight="600" fill="#8c7a63" letter-spacing="6">CAFÉ · LANDING PAGE</text>
+</svg>

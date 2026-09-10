@@ -1,6 +1,16 @@
-# ☕ Energy Peace
+<p align="center">
+  <img src="img/logo.svg" alt="EnergyPeace Café" width="620">
+</p>
 
-Uma landing page moderna e interativa com foco em experiência do usuário, design minimalista e simulação de funcionalidades de e-commerce no front-end.
+<p align="center">
+  <strong>Landing page de cafeteria com carrinho simulado no front-end</strong><br>
+  <a href="https://coffe-peace.vercel.app">Ver no ar</a>
+</p>
+
+---
+
+Landing page interativa com foco em experiência do usuário, design minimalista e
+simulação de funcionalidades de e-commerce inteiramente no navegador.
 
 ---
 
