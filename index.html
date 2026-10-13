@@ -2,173 +2,242 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Metadados de codificação e viewport para responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
+    <meta name="description" content="Coffe Peace: cafés artesanais e chás para cada momento do dia. Cardápio com filtro, carrinho com quantidades, cupom e entrega.">
     <meta name="author" content="Ryan Zinedine">
+    <meta name="theme-color" content="#010103">
     <link rel="canonical" href="https://coffe-peace.vercel.app/">
 
-    <!-- Open Graph / redes sociais -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://coffe-peace.vercel.app/">
-    <meta property="og:title" content="EnergyPeace Café — Cafeteria artesanal">
-    <meta property="og:description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
-    <meta property="og:image" content="https://coffe-peace.vercel.app/img/logo.png">
+    <meta property="og:title" content="Coffe Peace — Café, chá e calma">
+    <meta property="og:description" content="Cafés artesanais e chás para cada momento do dia. Monte seu pedido no cardápio online.">
+    <meta property="og:image" content="https://coffe-peace.vercel.app/img/og-image.png">
     <meta property="og:locale" content="pt_BR">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="EnergyPeace Café — Cafeteria artesanal">
-    <meta name="twitter:description" content="Landing page da EnergyPeace Café: cafés artesanais, ambiente acolhedor e cardápio completo. Projeto front-end responsivo.">
-    <meta name="twitter:image" content="https://coffe-peace.vercel.app/img/logo.png">
+    <meta name="twitter:title" content="Coffe Peace — Café, chá e calma">
+    <meta name="twitter:description" content="Cafés artesanais e chás para cada momento do dia. Monte seu pedido no cardápio online.">
+    <meta name="twitter:image" content="https://coffe-peace.vercel.app/img/og-image.png">
 
-    <!-- Pré-carregando fontes Google para performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Importa as fontes usadas no estilo do site -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
-    <!-- Ícone do site (favicon) -->
-    <link rel="icon" href="img/logo.png" type="img/png">
-
-    <!-- CSS principal -->
+    <link rel="icon" href="img/icone.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
     <script defer src="/_vercel/insights/script.js"></script>
 
-    <title>EnergyPeace Café</title>
+    <title>Coffe Peace</title>
 </head>
 
 <body>
-    <!-- container do vídeo de fundo e máscara de efeito -->
-    <div class="caixa-video">
-            <!-- vídeo em loop de fundo do site -->
-            <video poster="videos/poster.jpg" preload="metadata" playsinline src="videos/background.mp4" autoplay loop muted></video>
-            <!-- máscara semitransparente para efeito visual sobre o vídeo -->
-            <div class="mascara"></div>
+    <div class="caixa-video" aria-hidden="true">
+        <video poster="videos/poster.jpg" preload="metadata" playsinline src="videos/background.mp4" autoplay loop muted></video>
+        <div class="mascara"></div>
+    </div>
+
+    <header id="topo">
+        <div class="header-conteudo">
+            <a href="#inicio" class="marca" aria-label="Coffe Peace — voltar ao início">
+                <img src="img/icone.svg" alt="" width="44" height="44">
+                <span>Coffe <strong>Peace</strong></span>
+            </a>
+
+            <nav id="menu" aria-label="Navegação principal">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#cardapio">Cardápio</a>
+                <a href="#contato">Contato</a>
+            </nav>
+
+            <div class="header-acoes">
+                <button id="abrir-carrinho" class="botao-icone" aria-label="Abrir carrinho" aria-controls="carrinho-lateral">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+                    <span id="contador-carrinho" class="contador" hidden>0</span>
+                </button>
+                <button id="abrir-menu" class="botao-icone botao-menu" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
+    </header>
 
-        <!-- cabeçalho principal com logo e navegação âncora -->
-        <header>
-            <section>
-                <!-- logo clicável retorna ao topo -->
-                <a href="#">
-                    <img src="img/logo.png" alt="logo-cafeteria">
-                </a>
-                <!-- links de navegação interna -->
-                <nav>
-                    <a href="#">Home</a>
-                    <a href="#sobre">Sobre</a>
-                    <a href="#catalogo">Produtos</a>
-                </nav>
-            </section>
-        </header>
-
-        <!-- seção principal de destaque com chamada para ação -->
-        <section class="caixa-principal">
+    <main>
+        <section class="caixa-principal" id="inicio">
             <div>
-                <h3>O Melhor Café da Região</h3>
-                <p>Experimente os momentos do dia com a vibe enérgica ou acalmante para evitar o estresse</p>
-                <a href="#catalogo" class="botao-link">Pegue o seu agora</a>
+                <p class="selo">Café · Chá · Calma</p>
+                <h1>O melhor café da região</h1>
+                <p>Energia para a rotina agitada ou calma para desacelerar: escolha a vibe do seu momento.</p>
+                <div class="botoes-principal">
+                    <a href="#cardapio" class="botao-link">Ver cardápio</a>
+                    <a href="#sobre" class="botao-link botao-contorno">Conheça a casa</a>
+                </div>
             </div>
         </section>
-        <!-- seção "Sobre Nós" com imagem e texto institucional -->
+
         <section class="caixa-sobre" id="sobre">
-            <h2><span>Sobre</span> Nós</h2>
+            <h2><span>Sobre</span> nós</h2>
             <div class="sobre-container">
                 <div class="sobre-imagem">
-                    <img loading="lazy" decoding="async" src="img/about-img.jpg" alt="Sobre Nós">
+                    <img loading="lazy" decoding="async" src="img/about-img.jpg" alt="Xícaras de café servidas no balcão da Coffe Peace">
                 </div>
 
                 <div class="sobre-texto">
                     <h3>O que faz o nosso café especial</h3>
-                    <p>A mistura entre um momento único ou uma rotina agitada sem perder o gosto, qualidade e a energia
-                        que a cafeína pode proporcionar.</p>
-                    <p>Apreciamos momentos de calma com chá para desascelerar, relaxar e apreciar o momento com a mente
-                        mais tranquila.</p>
-                    <a href="#" class="botao-link">Saiba Mais</a>
+                    <p>A mistura entre um momento único e uma rotina agitada, sem perder o gosto, a qualidade e a energia que a cafeína pode proporcionar.</p>
+                    <p>Também apreciamos momentos de calma: nossos chás ajudam a desacelerar, relaxar e aproveitar o momento com a mente mais tranquila.</p>
+                    <ul class="destaques">
+                        <li><strong>100%</strong> grãos arábica</li>
+                        <li><strong>6</strong> bebidas no cardápio</li>
+                        <li><strong>15 min</strong> para retirada</li>
+                    </ul>
+                    <a href="#contato" class="botao-link">Saiba mais</a>
                 </div>
-
             </div>
         </section>
 
-        <!-- seção de catálogo de produtos com cards e botão adicionar ao carrinho -->
-        <section class="catalogo" id="catalogo">
-            <h2>Nossos <span>Cafés</span></h2>
-            <div class="produtos">
+        <section class="catalogo" id="cardapio">
+            <h2>Nosso <span>cardápio</span></h2>
 
-                <article class="produto">
-                    <h3>Café Expresso</h3>
-                    <img loading="lazy" decoding="async" src="img/cafe_expresso.png" alt="Café Expresso">
-                    <p class="preco">R$ 5,00</p>
-                    <button class="add">Adicionar ao Carrinho</button>
+            <div class="cardapio-controles">
+                <div class="filtros" role="group" aria-label="Filtrar por categoria">
+                    <button class="filtro ativo" data-categoria="todos" aria-pressed="true">Todos</button>
+                    <button class="filtro" data-categoria="cafe" aria-pressed="false">Cafés</button>
+                    <button class="filtro" data-categoria="cha" aria-pressed="false">Chás</button>
+                </div>
+                <label class="busca">
+                    <span class="sr-only">Buscar no cardápio</span>
+                    <input id="busca" type="search" placeholder="Buscar bebida..." autocomplete="off">
+                </label>
+            </div>
+
+            <!-- cards gerados pelo script.js a partir da lista PRODUTOS -->
+            <div class="produtos" id="produtos"></div>
+            <p class="sem-resultado" id="sem-resultado" hidden>Nenhuma bebida encontrada.</p>
+        </section>
+
+        <section class="contato" id="contato">
+            <h2>Visite a <span>casa</span></h2>
+            <div class="contato-grade">
+                <article>
+                    <h3>Horários</h3>
+                    <p>Seg a sex: 7h às 20h</p>
+                    <p>Sáb e dom: 8h às 18h</p>
                 </article>
-
-                <article class="produto">
-                    <h3>Café Mocha</h3>
-                    <img loading="lazy" decoding="async" src="img/cafe_mocha.png" alt="Café Mocha">
-                    <p class="preco">R$ 7,00</p>
-                    <button class="add">Adicionar ao Carrinho</button>
+                <article>
+                    <h3>Retirada</h3>
+                    <p>Pedido pronto em até 15 minutos no balcão, sem taxa.</p>
                 </article>
-
-                <article class="produto">
-                    <h3>Cappuccino</h3>
-                    <img loading="lazy" decoding="async" src="img/cappuccino.png" alt="Café Cappuccino">
-                    <p class="preco">R$ 8,00</p>
-                    <button class="add">Adicionar ao Carrinho</button>
+                <article>
+                    <h3>Entrega</h3>
+                    <p>R$ 5,00 na região, grátis em pedidos a partir de R$ 40,00.</p>
                 </article>
-
-                <article class="produto">
-                    <h3>Latte</h3>
-                    <img loading="lazy" decoding="async" src="img/latte.png" alt="Café Latte">
-                    <p class="preco">R$ 9,00</p>
-                    <button class="add">Adicionar ao Carrinho</button>
-                </article>
-
-                <article class="produto">
-                    <h3>Macchiato</h3>
-                    <img loading="lazy" decoding="async" src="img/macchiato.png" alt="Café Macchiato">
-                    <p class="preco">R$ 10,00</p>
-                    <button class="add">Adicionar ao Carrinho</button>
+                <article>
+                    <h3>Primeira compra?</h3>
+                    <p>Use o cupom <strong>PEACE10</strong> e ganhe 10% de desconto.</p>
                 </article>
             </div>
         </section>
+    </main>
 
-        <!-- botão que abre o painel do carrinho lateral -->
-        <button id="abrir-carrinho">🛒</button>
+    <div id="fundo-escuro" class="fundo-escuro" hidden></div>
 
-        <!-- painel do carrinho lateral (overlay) -->
-        <div id="carrinho-lateral">
-            <div class="carrinho-header">
-                <h2>Seu Carrinho</h2>
-                <button id="fechar-carrinho">✖</button> <!-- fecha o painel lateral -->
-            </div>
-
-            <!-- campos do carrinho: lista de itens + total + finalizar compra -->
-            <section class="carrinho">
-                <h2>Carrinho</h2>
-
-                <!-- itens adicionados dinamicamente pelo script -->
-                <ul id="lista-carrinho"></ul>
-
-                <!-- total atualizado automaticamente -->
-                <p id="total">Total: R$0,00</p>
-                <button id="finalizar-compra">Finalizar Compra</button>
-            </section>
+    <aside id="carrinho-lateral" class="carrinho-lateral" aria-label="Carrinho de compras" aria-hidden="true">
+        <div class="carrinho-header">
+            <h2>Seu carrinho <span id="carrinho-qtd"></span></h2>
+            <button id="fechar-carrinho" class="botao-icone" aria-label="Fechar carrinho">✕</button>
         </div>
 
-        <!-- elemento toast usado para mensagens rápidas ao usuário -->
-        <div id="toast" class="toast">Mensagem</div>
+        <div class="carrinho-vazio" id="carrinho-vazio">
+            <p>Seu carrinho está vazio.</p>
+            <a href="#cardapio" class="botao-link" id="ir-cardapio">Ver cardápio</a>
+        </div>
 
-        <!-- rodapé do site -->
-        <footer>
-            <p>Copyright © 2026 EnergyPeace Café. Todos os direitos reservados.</p>
-        </footer>
+        <ul id="lista-carrinho" class="lista-carrinho"></ul>
 
-        <!-- script principal que controla carrinho e interações -->
-        <script src="script.js"></script>
+        <div class="carrinho-rodape" id="carrinho-rodape">
+            <form class="cupom" id="form-cupom">
+                <label for="cupom" class="sr-only">Cupom de desconto</label>
+                <input id="cupom" type="text" placeholder="Cupom de desconto" autocomplete="off">
+                <button type="submit">Aplicar</button>
+            </form>
+
+            <fieldset class="entrega">
+                <legend class="sr-only">Forma de recebimento</legend>
+                <label><input type="radio" name="entrega" value="retirada" checked> Retirar no balcão</label>
+                <label><input type="radio" name="entrega" value="entrega"> Entrega</label>
+            </fieldset>
+
+            <dl class="resumo">
+                <div><dt>Subtotal</dt><dd id="subtotal">R$ 0,00</dd></div>
+                <div id="linha-desconto" hidden><dt>Desconto</dt><dd id="desconto">- R$ 0,00</dd></div>
+                <div><dt>Frete</dt><dd id="frete">Grátis</dd></div>
+                <div class="resumo-total"><dt>Total</dt><dd id="total">R$ 0,00</dd></div>
+            </dl>
+
+            <button id="finalizar-compra" class="botao-principal">Finalizar pedido</button>
+            <button id="limpar-carrinho" class="botao-texto">Esvaziar carrinho</button>
+        </div>
+    </aside>
+
+    <dialog id="confirmacao" class="confirmacao">
+        <h2>Pedido confirmado ☕</h2>
+        <p id="confirmacao-texto"></p>
+        <ul id="confirmacao-itens"></ul>
+        <p class="confirmacao-total" id="confirmacao-total"></p>
+        <button id="fechar-confirmacao" class="botao-principal">Continuar navegando</button>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <footer>
+        <div class="rodape-grade">
+            <div class="rodape-marca">
+                <a href="#inicio" class="marca">
+                    <img src="img/icone.svg" alt="" width="40" height="40">
+                    <span>Coffe <strong>Peace</strong></span>
+                </a>
+                <p>Energia para a rotina, calma para desacelerar. Cafés artesanais e chás preparados na hora.</p>
+                <a href="#cardapio" class="botao-link">Fazer pedido</a>
+            </div>
+
+            <nav class="rodape-coluna" aria-label="Links do rodapé">
+                <h3>Navegue</h3>
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#cardapio">Cardápio</a>
+                <a href="#contato">Contato</a>
+            </nav>
+
+            <div class="rodape-coluna">
+                <h3>Horários</h3>
+                <p><span>Seg a sex</span> 7h às 20h</p>
+                <p><span>Sáb e dom</span> 8h às 18h</p>
+            </div>
+
+            <div class="rodape-coluna">
+                <h3>Pedidos</h3>
+                <p>Retirada em até 15 min</p>
+                <p>Entrega grátis acima de R$ 40</p>
+                <p>Cupom <strong>PEACE10</strong> na primeira compra</p>
+            </div>
+        </div>
+
+        <div class="rodape-base">
+            <p>© 2026 Coffe Peace · Projeto de portfólio: nenhum pedido é cobrado ou enviado.</p>
+            <p>Feito por <a href="https://github.com/RyanZine/Coffe-Peace" target="_blank" rel="noopener">Ryan Zinedine</a></p>
+            <a href="#inicio" class="voltar-topo">Voltar ao topo
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- CartBoost.AI: para testar, troque o src pela URL onde o pixel.js estiver servido e descomente -->
+    <!-- <script defer src="http://localhost:5000/pixel.js" data-debug="true" data-store="0199ef7e-9143-4021-8408-639758805b31"></script> -->
+
+    <script src="script.js"></script>
 </body>
 
 </html>
