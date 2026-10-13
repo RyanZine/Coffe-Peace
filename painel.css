@@ -1,0 +1,629 @@
+/* Painel da equipe: reaproveita o style.css; fundo sólido porque aqui não há vídeo */
+body {
+  background-color: var(--bg);
+}
+
+.marca small {
+  margin-left: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border: 0.1rem solid var(--verde);
+  border-radius: 10rem;
+  color: var(--verde);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.abas {
+  display: flex;
+  gap: 0.6rem;
+  margin-right: auto;
+  /* no celular as abas rolam na horizontal em vez de vazar da tela */
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.abas button {
+  flex-shrink: 0;
+}
+
+.abas[hidden],
+.usuario[hidden],
+.abas button[hidden] {
+  display: none;
+}
+
+.abas button {
+  padding: 0.8rem 1.8rem;
+  border: var(--border);
+  border-radius: 10rem;
+  background: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.abas button.ativo {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-left: auto;
+  font-size: 1.3rem;
+  color: var(--texto-suave);
+}
+
+.painel {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: calc(var(--altura-header) + 3rem) var(--margem) 6rem;
+}
+
+.painel section {
+  padding: 0;
+  max-width: none;
+}
+
+.painel section[hidden] {
+  display: none;
+}
+
+.painel-aviso {
+  margin-bottom: 2rem;
+  padding: 1.4rem 2rem;
+  border: 0.1rem solid rgba(211, 173, 127, 0.4);
+  border-radius: var(--raio);
+  color: var(--main-color);
+  font-size: 1.5rem;
+}
+
+.painel-aviso[hidden] {
+  display: none;
+}
+
+/* ---------- Login ---------- */
+.login {
+  display: grid;
+  place-items: center;
+  min-height: 60dvh;
+}
+
+.cartao-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: min(40rem, 100%);
+  padding: 3.2rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: var(--raio);
+}
+
+.cartao-login h1 {
+  font-size: 2.6rem;
+}
+
+.cartao-login p {
+  font-size: 1.4rem;
+  color: var(--texto-suave);
+}
+
+.cartao-login label,
+.novo-produto,
+.novo-cupom {
+  font-size: 1.4rem;
+}
+
+.cartao-login label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.painel input,
+.painel select {
+  padding: 1rem 1.2rem;
+  border: var(--border);
+  border-radius: 0.8rem;
+  background-color: var(--black);
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.painel input:focus,
+.painel select:focus {
+  outline: none;
+  border-color: var(--main-color);
+}
+
+.erro {
+  color: #e08a7a !important;
+  min-height: 1.8rem;
+}
+
+/* ---------- Cabeçalho das abas ---------- */
+.aba-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.4rem;
+}
+
+.painel h2 {
+  padding: 0;
+  text-align: left;
+  font-size: 3.2rem;
+}
+
+.ao-vivo,
+.dica {
+  font-size: 1.4rem;
+  color: var(--texto-suave);
+}
+
+.ao-vivo::before {
+  content: "";
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-right: 0.8rem;
+  border-radius: 50%;
+  background-color: var(--texto-suave);
+}
+
+.ao-vivo.ligado {
+  color: var(--verde);
+}
+
+.ao-vivo.ligado::before {
+  background-color: var(--verde);
+  box-shadow: 0 0 0 0.4rem rgba(156, 184, 122, 0.25);
+}
+
+/* ---------- Quadro de pedidos ---------- */
+.quadro {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.coluna {
+  min-height: 30rem;
+  padding: 1.6rem;
+  background-color: var(--black);
+  border: var(--border);
+  border-radius: var(--raio);
+}
+
+.coluna h3 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: var(--main-color);
+}
+
+.coluna h3 span {
+  min-width: 2.6rem;
+  padding: 0 0.8rem;
+  border-radius: 10rem;
+  background-color: rgba(211, 173, 127, 0.15);
+  text-align: center;
+}
+
+.coluna ol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  list-style: none;
+}
+
+.cartao-pedido {
+  padding: 1.4rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: 1rem;
+  font-size: 1.4rem;
+}
+
+.cartao-pedido.novo {
+  border-color: var(--main-color);
+  animation: chegou 1.2s ease 2;
+}
+
+@keyframes chegou {
+  50% {
+    box-shadow: 0 0 0 0.6rem rgba(211, 173, 127, 0.25);
+  }
+}
+
+.cartao-topo,
+.cartao-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartao-topo span,
+.contato {
+  color: var(--texto-suave);
+  font-size: 1.3rem;
+}
+
+.cliente {
+  margin-top: 0.6rem;
+  font-weight: 500;
+}
+
+.cartao-pedido .itens {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+.etiqueta {
+  padding: 0.2rem 1rem;
+  border-radius: 10rem;
+  font-size: 1.2rem;
+}
+
+.etiqueta-retirada {
+  background-color: rgba(156, 184, 122, 0.15);
+  color: var(--verde);
+}
+
+.etiqueta-entrega {
+  background-color: rgba(211, 173, 127, 0.15);
+  color: var(--main-color);
+}
+
+.cartao-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.cartao-acoes:empty {
+  display: none;
+}
+
+.cartao-acoes .botao-principal {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.3rem;
+}
+
+/* ---------- Cardápio ---------- */
+.lista-produtos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.linha-produto {
+  display: grid;
+  grid-template-columns: 5.6rem minmax(12rem, 1fr) 10rem minmax(16rem, 2fr) auto auto;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.2rem 1.6rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+
+.linha-produto img {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 0.8rem;
+  object-fit: cover;
+}
+
+.linha-produto.esgotado img {
+  filter: grayscale(1) brightness(0.6);
+}
+
+.alternar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.alternar input {
+  accent-color: var(--main-color);
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.novo-produto,
+.novo-cupom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.4rem;
+  padding: 2rem;
+  border: 0.1rem dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--raio);
+}
+
+.novo-produto[hidden] {
+  display: none;
+}
+
+.novo-produto h3 {
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+.novo-produto input[name="descricao"] {
+  flex: 1 1 24rem;
+}
+
+.novo-produto .botao-principal,
+.novo-cupom .botao-principal {
+  padding: 1rem 2.4rem;
+  font-size: 1.4rem;
+}
+
+/* ---------- Loja ---------- */
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.metricas article {
+  padding: 2rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: var(--raio);
+}
+
+.metricas p {
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.metricas strong {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 3rem;
+  color: var(--main-color);
+}
+
+.metricas ol {
+  margin-top: 0.8rem;
+  padding-left: 1.8rem;
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+
+.subtitulo {
+  margin: 4rem 0 1.4rem;
+  font-size: 2rem;
+}
+
+.lista-cupons {
+  list-style: none;
+}
+
+.lista-cupons li {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.2rem 0;
+  border-bottom: var(--border);
+  font-size: 1.5rem;
+}
+
+.lista-cupons li span {
+  flex: 1;
+  color: var(--texto-suave);
+}
+
+.lista-cupons li.inativo strong {
+  text-decoration: line-through;
+  color: var(--texto-suave);
+}
+
+.novo-cupom input[name="codigo"] {
+  text-transform: uppercase;
+}
+
+.novo-cupom input[name="percentual"] {
+  width: 16rem;
+}
+
+/* ---------- Balcão e lojista ---------- */
+.dica-demo {
+  padding: 1rem 1.2rem;
+  border-radius: 0.8rem;
+  background-color: rgba(156, 184, 122, 0.12);
+  color: var(--verde) !important;
+}
+
+.cartao-login .botao-principal {
+  width: 100%;
+}
+
+.lista-esgotados {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lista-esgotados li {
+  padding: 1rem 1.6rem;
+  border: var(--border);
+  border-radius: 10rem;
+  background-color: var(--card);
+}
+
+.lista-esgotados li.esgotado {
+  border-color: rgba(224, 138, 122, 0.5);
+  color: #e08a7a;
+}
+
+.lista-pedidos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+  gap: 1.4rem;
+}
+
+.cartao-topo .status {
+  margin-left: auto;
+  margin-right: 1rem;
+  padding: 0.2rem 1rem;
+  border-radius: 10rem;
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.status-preparando,
+.status-pronto {
+  color: var(--main-color);
+}
+
+.status-entregue {
+  color: var(--verde);
+}
+
+.status-cancelado {
+  color: #e08a7a;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.fila-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.6rem 2.4rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: var(--raio);
+  font-size: 1.5rem;
+}
+
+.fila-item strong {
+  font-size: 2.8rem;
+  color: var(--main-color);
+}
+
+.ajustes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.6rem;
+}
+
+.cartao-ajuste {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 2.4rem;
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: var(--raio);
+}
+
+.cartao-ajuste h3 {
+  font-size: 1.8rem;
+}
+
+.cartao-ajuste p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--texto-suave);
+}
+
+.cartao-ajuste .botao-principal {
+  padding: 1rem 2.4rem;
+  font-size: 1.4rem;
+}
+
+.perigo {
+  color: #e08a7a;
+  font-size: 1.5rem;
+}
+
+/* ---------- Telas menores ---------- */
+@media (max-width: 1000px) {
+  .quadro,
+  .metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linha-produto {
+    grid-template-columns: 5.6rem 1fr 10rem;
+  }
+
+  .linha-produto .campo-descricao {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .usuario span {
+    display: none;
+  }
+
+  .abas button {
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  /* abas descem para uma segunda linha; o header cresce junto */
+  header {
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .header-conteudo {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .painel {
+    padding-top: 14rem;
+  }
+
+  .quadro,
+  .metricas {
+    grid-template-columns: 1fr;
+  }
+
+  .marca small {
+    display: none;
+  }
+}

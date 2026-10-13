@@ -1,0 +1,179 @@
+/* Página de acompanhamento: reaproveita o style.css e acrescenta só o que é dela */
+body {
+  background: radial-gradient(circle at 20% 0%, #2a241e 0%, var(--bg) 60%);
+  min-height: 100dvh;
+}
+
+.voltar-loja {
+  white-space: nowrap;
+  margin: 0 0 0 auto;
+  font-size: 1.4rem;
+  padding: 0.9rem 2rem;
+}
+
+.pagina-pedido section {
+  max-width: 72rem;
+  padding-top: calc(var(--altura-header) + 4rem);
+}
+
+.pedido-mensagem {
+  text-align: center;
+  font-size: 1.6rem;
+  color: var(--texto-suave);
+  margin-bottom: 2rem;
+}
+
+.pedido-card,
+.meus-pedidos {
+  background-color: var(--card);
+  border: var(--border);
+  border-radius: var(--raio);
+  padding: 3rem;
+}
+
+.pedido-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.pedido-numero {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pedido-entrega,
+.pedido-atualizado {
+  font-size: 1.4rem;
+  color: var(--texto-suave);
+  margin-top: 0.4rem;
+}
+
+/* Linha do tempo do pedido: as etapas concluídas acendem em dourado */
+.linha-status {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  list-style: none;
+  margin: 3.2rem 0;
+  counter-reset: etapa;
+}
+
+.linha-status li {
+  position: relative;
+  padding-top: 4.4rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--texto-suave);
+  counter-increment: etapa;
+}
+
+.linha-status li::before {
+  content: counter(etapa);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  transform: translateX(-50%);
+  border: 0.2rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background-color: var(--card);
+  font-weight: 700;
+}
+
+.linha-status li + li::after {
+  content: "";
+  position: absolute;
+  top: 1.6rem;
+  right: 50%;
+  width: 100%;
+  height: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.linha-status li.feito {
+  color: var(--creme);
+}
+
+.linha-status li.feito::before {
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  color: var(--bg);
+}
+
+.linha-status li.feito::after {
+  background-color: var(--main-color);
+}
+
+.linha-status li.atual {
+  font-weight: 700;
+  color: var(--main-color);
+}
+
+.linha-status li.atual::before {
+  box-shadow: 0 0 0 0.6rem rgba(211, 173, 127, 0.2);
+}
+
+.linha-status.cancelado li {
+  opacity: 0.4;
+}
+
+.pedido-itens {
+  list-style: none;
+  border-top: var(--border);
+  padding-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.pedido-itens li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  padding: 0.6rem 0;
+}
+
+.pedido-itens span {
+  color: var(--main-color);
+}
+
+.meus-pedidos {
+  margin-top: 2rem;
+}
+
+.meus-pedidos h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.meus-pedidos ul {
+  list-style: none;
+}
+
+.meus-pedidos a {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: var(--border);
+  color: var(--main-color);
+  font-size: 1.6rem;
+}
+
+@media (max-width: 480px) {
+  .voltar-loja {
+    padding: 0.8rem 1.4rem;
+    font-size: 1.3rem;
+  }
+
+  .pedido-card {
+    padding: 2rem;
+  }
+
+  .linha-status li {
+    font-size: 1.2rem;
+  }
+}

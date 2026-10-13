@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#010103">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="painel.css">
+    <title>Balcão · Coffe Peace</title>
+</head>
+
+<body>
+    <header id="topo" class="rolado">
+        <div class="header-conteudo">
+            <a href="index.html" class="marca" aria-label="Coffe Peace — ver a loja">
+                <img src="img/icone.svg" alt="" width="44" height="44">
+                <span>Coffe <strong>Peace</strong> <small>balcão</small></span>
+            </a>
+            <div class="usuario" id="usuario" hidden>
+                <button id="sair" class="botao-texto">Sair do balcão</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="painel">
+        <!-- PIN único da loja: o tablet do balcão é compartilhado pela equipe -->
+        <section class="login" id="tela-pin">
+            <form id="form-pin" class="cartao-login">
+                <h1>Balcão</h1>
+                <p>Digite o PIN da loja para ver os pedidos.</p>
+                <label>PIN <input id="pin" type="password" inputmode="numeric" pattern="\d{4,6}" maxlength="6" required autocomplete="off"></label>
+                <button class="botao-principal">Entrar</button>
+                <p class="erro" id="erro-pin" role="alert"></p>
+                <p class="dica-demo">Demonstração: o PIN padrão é <strong>1234</strong>.</p>
+            </form>
+        </section>
+
+        <section class="aba" id="tela-balcao" hidden>
+            <div class="aba-topo">
+                <h2>Pedidos de <span>hoje</span></h2>
+                <p class="ao-vivo ligado">ao vivo</p>
+            </div>
+            <div class="quadro" id="quadro">
+                <div class="coluna" data-coluna="recebido"><h3>Recebidos <span></span></h3><ol></ol></div>
+                <div class="coluna" data-coluna="preparando"><h3>Preparando <span></span></h3><ol></ol></div>
+                <div class="coluna" data-coluna="pronto"><h3>Prontos <span></span></h3><ol></ol></div>
+                <div class="coluna" data-coluna="entregue"><h3>Entregues <span></span></h3><ol></ol></div>
+            </div>
+
+            <h3 class="subtitulo">Acabou algum item?</h3>
+            <ul class="lista-esgotados" id="lista-esgotados"></ul>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/balcao.js"></script>
+</body>
+
+</html>

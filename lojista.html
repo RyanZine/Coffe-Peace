@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#010103">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="painel.css">
+    <title>Lojista · Coffe Peace</title>
+</head>
+
+<body>
+    <header id="topo" class="rolado">
+        <div class="header-conteudo">
+            <a href="index.html" class="marca" aria-label="Coffe Peace — ver a loja">
+                <img src="img/icone.svg" alt="" width="44" height="44">
+                <span>Coffe <strong>Peace</strong> <small>lojista</small></span>
+            </a>
+
+            <div class="abas" id="abas" role="navigation" aria-label="Seções do painel" hidden>
+                <button data-aba="resumo" class="ativo">Resumo</button>
+                <button data-aba="pedidos">Pedidos</button>
+                <button data-aba="cardapio">Cardápio</button>
+                <button data-aba="cupons">Cupons</button>
+                <button data-aba="ajustes">Ajustes</button>
+            </div>
+
+            <div class="usuario" id="usuario" hidden>
+                <button id="sair" class="botao-texto">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="painel">
+        <!-- Na demonstração os dados ficam só neste navegador, então a entrada é livre -->
+        <section class="login" id="tela-entrada">
+            <div class="cartao-login">
+                <h1>Painel do lojista</h1>
+                <p>Controle do cardápio, cupons, pedidos e da equipe.</p>
+                <button class="botao-principal" id="entrar">Entrar como lojista (demonstração)</button>
+                <p class="dica-demo">Tudo o que você mudar aqui vale só para este navegador.</p>
+            </div>
+        </section>
+
+        <section class="aba" id="aba-resumo" hidden>
+            <div class="aba-topo">
+                <h2>Resumo do <span>dia</span></h2>
+            </div>
+            <div class="metricas">
+                <article><p>Pedidos</p><strong id="m-pedidos">0</strong></article>
+                <article><p>Faturamento</p><strong id="m-faturamento">R$ 0,00</strong></article>
+                <article><p>Ticket médio</p><strong id="m-ticket">R$ 0,00</strong></article>
+                <article><p>Mais vendidos</p><ol id="m-top"></ol></article>
+            </div>
+            <h3 class="subtitulo">Na fila agora</h3>
+            <div class="fila" id="fila"></div>
+        </section>
+
+        <section class="aba" id="aba-pedidos" hidden>
+            <div class="aba-topo">
+                <h2>Pedidos de <span>hoje</span></h2>
+                <p class="dica">O lojista pode cancelar pedidos ainda não preparados.</p>
+            </div>
+            <ol class="lista-pedidos" id="lista-pedidos"></ol>
+        </section>
+
+        <section class="aba" id="aba-cardapio" hidden>
+            <div class="aba-topo">
+                <h2>Cardápio</h2>
+                <p class="dica">Edite e salve. A vitrine muda na hora.</p>
+            </div>
+            <ul class="lista-produtos" id="lista-produtos"></ul>
+
+            <form class="novo-produto" id="form-produto">
+                <h3>Novo produto</h3>
+                <input name="nome" placeholder="Nome" required minlength="2" maxlength="60">
+                <select name="categoria">
+                    <option value="cafe">Café</option>
+                    <option value="cha">Chá</option>
+                </select>
+                <input name="preco" type="number" min="0.5" max="999" step="0.5" placeholder="Preço" required>
+                <select name="imagem" id="imagens"></select>
+                <input name="descricao" placeholder="Descrição curta" maxlength="160">
+                <button class="botao-principal">Adicionar</button>
+            </form>
+        </section>
+
+        <section class="aba" id="aba-cupons" hidden>
+            <div class="aba-topo">
+                <h2>Cupons</h2>
+            </div>
+            <ul class="lista-cupons" id="lista-cupons"></ul>
+            <form class="novo-cupom" id="form-cupom">
+                <input name="codigo" placeholder="CÓDIGO" required pattern="[A-Za-z0-9]{3,20}">
+                <input name="percentual" type="number" min="1" max="50" placeholder="% de desconto" required>
+                <button class="botao-principal">Criar cupom</button>
+            </form>
+        </section>
+
+        <section class="aba" id="aba-ajustes" hidden>
+            <div class="aba-topo">
+                <h2>Ajustes</h2>
+            </div>
+            <div class="ajustes">
+                <form class="cartao-ajuste" id="form-pin">
+                    <h3>PIN do balcão</h3>
+                    <p>PIN atual: <strong id="pin-atual"></strong>. A equipe usa este número no tablet do balcão.</p>
+                    <input name="pin" inputmode="numeric" pattern="\d{4,6}" maxlength="6" placeholder="Novo PIN (4 a 6 números)" required>
+                    <button class="botao-principal">Trocar PIN</button>
+                </form>
+                <div class="cartao-ajuste">
+                    <h3>Restaurar demonstração</h3>
+                    <p>Volta cardápio, preços, cupons e PIN ao original e apaga os pedidos deste navegador.</p>
+                    <button class="botao-texto perigo" id="restaurar">Restaurar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="js/lojista.js"></script>
+</body>
+
+</html>

@@ -1,14 +1,10 @@
-// Fonte única dos produtos: preço vem daqui, nunca do texto da página
-const PRODUTOS = [
-    { id: "expresso", nome: "Café Expresso", categoria: "cafe", preco: 5, imagem: "img/cafe_expresso.png", descricao: "Curto, intenso e encorpado." },
-    { id: "mocha", nome: "Café Mocha", categoria: "cafe", preco: 7, imagem: "img/cafe_mocha.png", descricao: "Expresso com chocolate e leite vaporizado." },
-    { id: "cappuccino", nome: "Cappuccino", categoria: "cafe", preco: 8, imagem: "img/cappuccino.png", descricao: "Expresso, leite e uma espuma cremosa." },
-    { id: "latte", nome: "Latte", categoria: "cafe", preco: 9, imagem: "img/latte.png", descricao: "Mais leite, sabor suave para qualquer hora." },
-    { id: "macchiato", nome: "Macchiato", categoria: "cafe", preco: 10, imagem: "img/macchiato.png", descricao: "Expresso marcado com espuma de leite." },
-    { id: "earl-grey", nome: "Chá Earl Grey", categoria: "cha", preco: 6, imagem: "img/cha.png", descricao: "Chá preto com bergamota para desacelerar." },
-];
+import { carregarProdutos, validarCupom, criarPedido, ouvirMudancas } from "./js/dados.js";
 
-const CUPONS = { PEACE10: 0.1 };
+// O cardápio vem da camada de dados: é o mesmo que o lojista edita no painel dele
+let PRODUTOS = [];
+
+// Só para migrar carrinhos antigos, que guardavam apenas o código do cupom
+const CUPONS_ANTIGOS = { PEACE10: 0.1 };
 const TAXA_ENTREGA = 5;
 const FRETE_GRATIS_A_PARTIR = 40;
 const CHAVE = "carrinho-v2";
@@ -16,40 +12,50 @@ const CHAVE = "carrinho-v2";
 const moeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 const buscarProduto = (id) => PRODUTOS.find((p) => p.id === id);
 
-let estado = carregarEstado();
+// O carrinho salvo só é conferido depois que o cardápio carrega
+let estado = lerCarrinhoSalvo();
 
-function carregarEstado() {
-    const padrao = { itens: {}, cupom: null, entrega: "retirada" };
+function lerCarrinhoSalvo() {
     try {
         const salvo = JSON.parse(localStorage.getItem(CHAVE));
-        if (salvo) return sanitizar(salvo);
+        if (salvo) return salvo;
 
-        // Versão anterior guardava [{ nome, preco }]; converte para { id: quantidade }
+        // Versão anterior guardava [{ nome, preco }]; os nomes viram ids na conferência
         const antigo = JSON.parse(localStorage.getItem("carrinho"));
         localStorage.removeItem("carrinho");
-        if (Array.isArray(antigo)) {
-            antigo.forEach((item) => {
-                const produto = PRODUTOS.find((p) => p.nome === item?.nome);
-                if (produto) padrao.itens[produto.id] = (padrao.itens[produto.id] || 0) + 1;
-            });
-        }
+        if (Array.isArray(antigo)) return { nomesAntigos: antigo.map((item) => item?.nome) };
     } catch {
         // Armazenamento bloqueado ou corrompido: segue com carrinho vazio
     }
-    return padrao;
+    return {};
 }
 
 // Dados salvos podem ter sido editados à mão; só aceita ids, cupons e opções conhecidos
 function sanitizar(salvo) {
     const itens = {};
     Object.entries(salvo.itens && typeof salvo.itens === "object" ? salvo.itens : {}).forEach(([id, qtd]) => {
-        if (buscarProduto(id) && Number.isInteger(qtd) && qtd > 0) itens[id] = qtd;
+        if (disponivel(id) && Number.isInteger(qtd) && qtd > 0) itens[id] = qtd;
+    });
+    (Array.isArray(salvo.nomesAntigos) ? salvo.nomesAntigos : []).forEach((nome) => {
+        const produto = PRODUTOS.find((p) => p.nome === nome);
+        if (produto && disponivel(produto.id)) itens[produto.id] = (itens[produto.id] || 0) + 1;
     });
     return {
         itens,
-        cupom: Object.hasOwn(CUPONS, salvo.cupom) ? salvo.cupom : null,
+        cupom: cupomValido(salvo.cupom),
         entrega: salvo.entrega === "entrega" ? "entrega" : "retirada",
     };
+}
+
+const disponivel = (id) => buscarProduto(id) && buscarProduto(id).disponivel !== false;
+
+// Versões anteriores salvavam só o código ("PEACE10"); agora vai junto o percentual
+function cupomValido(cupom) {
+    if (typeof cupom === "string" && Object.hasOwn(CUPONS_ANTIGOS, cupom)) return { codigo: cupom, percentual: CUPONS_ANTIGOS[cupom] };
+    if (cupom && /^[A-Z0-9]{3,20}$/.test(cupom.codigo) && cupom.percentual > 0 && cupom.percentual <= 0.5) {
+        return { codigo: cupom.codigo, percentual: cupom.percentual };
+    }
+    return null;
 }
 
 function salvarEstado() {
@@ -63,7 +69,7 @@ function salvarEstado() {
 function calcularTotais() {
     const subtotal = Object.entries(estado.itens)
         .reduce((soma, [id, qtd]) => soma + (buscarProduto(id)?.preco || 0) * qtd, 0);
-    const desconto = estado.cupom ? subtotal * CUPONS[estado.cupom] : 0;
+    const desconto = estado.cupom ? subtotal * estado.cupom.percentual : 0;
     const comDesconto = subtotal - desconto;
     const frete = estado.entrega === "entrega" && comDesconto > 0 && comDesconto < FRETE_GRATIS_A_PARTIR ? TAXA_ENTREGA : 0;
     const quantidade = Object.values(estado.itens).reduce((soma, qtd) => soma + qtd, 0);
@@ -127,6 +133,7 @@ function criarCard(produto) {
     card.querySelector("h3").textContent = produto.nome;
     card.querySelector(".descricao").textContent = produto.descricao;
     card.querySelector(".preco").textContent = moeda.format(produto.preco);
+    card.classList.toggle("esgotado", produto.disponivel === false);
 
     const botao = card.querySelector(".add");
     botao.dataset.id = produto.id;
@@ -137,6 +144,8 @@ function criarCard(produto) {
 // O botão mostra quantas unidades já estão no carrinho
 function atualizarBotaoAdicionar(botao) {
     const qtd = estado.itens[botao.dataset.id] || 0;
+    botao.disabled = !disponivel(botao.dataset.id);
+    if (botao.disabled) return (botao.textContent = "Esgotado");
     botao.textContent = qtd ? `Adicionar mais (${qtd} no carrinho)` : "Adicionar ao carrinho";
     botao.classList.toggle("no-carrinho", qtd > 0);
 }
@@ -202,7 +211,7 @@ function atualizarCarrinho() {
     document.getElementById("desconto").textContent = `- ${moeda.format(desconto)}`;
     document.getElementById("frete").textContent = frete ? moeda.format(frete) : "Grátis";
     document.getElementById("total").textContent = moeda.format(total);
-    document.getElementById("cupom").value = estado.cupom || "";
+    document.getElementById("cupom").value = estado.cupom?.codigo || "";
     document.querySelector(`input[name="entrega"][value="${estado.entrega}"]`).checked = true;
 
     document.querySelectorAll(".add").forEach(atualizarBotaoAdicionar);
@@ -248,23 +257,30 @@ lista.addEventListener("click", (evento) => {
     }
 });
 
-document.getElementById("form-cupom").addEventListener("submit", (evento) => {
+document.getElementById("form-cupom").addEventListener("submit", async (evento) => {
     evento.preventDefault();
     const codigo = document.getElementById("cupom").value.trim().toUpperCase();
 
     if (!codigo) {
         estado.cupom = null;
         mostrarToast("Cupom removido");
-    } else if (CUPONS[codigo]) {
-        estado.cupom = codigo;
-        mostrarToast(`Cupom ${codigo} aplicado: ${CUPONS[codigo] * 100}% de desconto`);
     } else {
-        mostrarToast("Cupom inválido");
-        return;
+        const percentual = await buscarPercentual(codigo);
+        if (!percentual) return mostrarToast("Cupom inválido");
+        estado.cupom = { codigo, percentual };
+        mostrarToast(`Cupom ${codigo} aplicado: ${Math.round(percentual * 100)}% de desconto`);
     }
     salvarEstado();
     atualizarCarrinho();
 });
+
+async function buscarPercentual(codigo) {
+    try {
+        return await validarCupom(codigo);
+    } catch {
+        return null;
+    }
+}
 
 document.querySelectorAll('input[name="entrega"]').forEach((opcao) => {
     opcao.addEventListener("change", () => {
@@ -345,39 +361,120 @@ window.addEventListener("scroll", () => {
 
 // ---------- Finalizar pedido ----------
 const dialogo = document.getElementById("confirmacao");
+const formCheckout = document.getElementById("form-checkout");
+
+// No checkout, o carrinho mostra só o resumo e o formulário
+function mostrarEtapa(checkout) {
+    document.querySelectorAll('[data-etapa="carrinho"]').forEach((bloco) => (bloco.hidden = checkout));
+    formCheckout.hidden = !checkout;
+    if (checkout) document.getElementById("cliente-nome").focus();
+}
 
 document.getElementById("finalizar-compra").addEventListener("click", () => {
     const totais = calcularTotais();
     if (totais.quantidade === 0) return mostrarToast("Seu carrinho está vazio!");
+    mostrarEtapa(true);
+    // begin_checkout: o visitante chegou ao formulário, o abandono daqui pesa mais
+    rastrear("begin_checkout", { itens: Object.keys(estado.itens), valor: Number(totais.total.toFixed(2)) });
+});
 
-    const numero = Math.floor(1000 + Math.random() * 9000);
+document.getElementById("voltar-carrinho").addEventListener("click", () => mostrarEtapa(false));
+
+formCheckout.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    const botao = document.getElementById("confirmar-pedido");
+    const cliente = { nome: document.getElementById("cliente-nome").value.trim() };
+
+    botao.disabled = true;
+    botao.textContent = "Enviando...";
+    try {
+        confirmarPedido(await enviarPedido(cliente));
+    } catch (erro) {
+        mostrarToast(`Não foi possível enviar: ${erro.message}`);
+        sincronizarCardapio();
+    } finally {
+        botao.disabled = false;
+        botao.textContent = "Confirmar pedido";
+    }
+});
+
+// O banco recalcula o total com os próprios preços; daqui só vão ids e quantidades
+function enviarPedido({ nome }) {
+    return criarPedido({
+        itens: Object.entries(estado.itens).map(([id, quantidade]) => ({ id, quantidade })),
+        entrega: estado.entrega,
+        cupom: estado.cupom?.codigo || null,
+        nome,
+    });
+}
+
+function confirmarPedido(pedido) {
     const recebimento = estado.entrega === "entrega" ? "Seu pedido sai para entrega em breve" : "Retire no balcão em até 15 minutos";
-    document.getElementById("confirmacao-texto").textContent = `Pedido nº ${numero}. ${recebimento}.`;
+    document.getElementById("confirmacao-texto").textContent = `Pedido nº ${pedido.numero}. ${recebimento}.`;
     document.getElementById("confirmacao-itens").replaceChildren(...Object.entries(estado.itens).map(([id, qtd]) => {
         const li = document.createElement("li");
         li.textContent = `${qtd}× ${buscarProduto(id).nome}`;
         return li;
     }));
-    document.getElementById("confirmacao-total").textContent = `Total: ${moeda.format(totais.total)}`;
+    document.getElementById("confirmacao-total").textContent = `Total: ${moeda.format(pedido.total)}`;
+
+    const acompanhar = document.getElementById("acompanhar-pedido");
+    acompanhar.hidden = !pedido.codigo;
+    if (pedido.codigo) {
+        acompanhar.href = `pedido.html?c=${encodeURIComponent(pedido.codigo)}`;
+        lembrarPedido(pedido);
+    }
 
     // checkout_completed marca a conversão e cancela a mensagem de recuperação
     rastrear("checkout_completed", {
-        pedido: numero,
-        valor: Number(totais.total.toFixed(2)),
+        pedido: pedido.numero,
+        valor: Number(pedido.total.toFixed(2)),
         itens: Object.keys(estado.itens),
         entrega: estado.entrega,
-        cupom: estado.cupom,
+        cupom: estado.cupom?.codigo || null,
     });
 
     estado.itens = {};
     estado.cupom = null;
     salvarEstado();
     atualizarCarrinho();
+    formCheckout.reset();
+    mostrarEtapa(false);
     fecharCarrinho();
     dialogo.showModal();
-});
+}
+
+// A página de acompanhamento lista os últimos pedidos deste navegador
+function lembrarPedido({ numero, codigo }) {
+    try {
+        const pedidos = JSON.parse(localStorage.getItem("meus-pedidos")) || [];
+        pedidos.unshift({ numero, codigo, em: Date.now() });
+        localStorage.setItem("meus-pedidos", JSON.stringify(pedidos.slice(0, 5)));
+    } catch {
+        // Sem armazenamento, o link da confirmação continua valendo
+    }
+}
 
 document.getElementById("fechar-confirmacao").addEventListener("click", () => dialogo.close());
 
-renderizarCardapio();
-atualizarCarrinho();
+// O pixel carrega depois deste script; ele só mede quais campos foram preenchidos, nunca os valores
+addEventListener("load", () => window.CartBoost?.trackForm?.("#form-checkout", "checkout"));
+
+// ---------- Cardápio ----------
+async function sincronizarCardapio() {
+    try {
+        const antes = Object.keys(estado.itens || {});
+        PRODUTOS = await carregarProdutos();
+        estado = sanitizar(estado);
+        if (antes.some((id) => !estado.itens[id])) mostrarToast("Um item do carrinho esgotou e foi removido");
+        salvarEstado();
+        renderizarCardapio();
+        atualizarCarrinho();
+    } catch {
+        mostrarToast("Não foi possível carregar o cardápio agora");
+    }
+}
+
+// Lojista mudou preço ou o balcão marcou esgotado em outra aba: a vitrine atualiza sozinha
+ouvirMudancas(sincronizarCardapio);
+sincronizarCardapio();

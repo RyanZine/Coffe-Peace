@@ -139,6 +139,18 @@
                     <p>Use o cupom <strong>PEACE10</strong> e ganhe 10% de desconto.</p>
                 </article>
             </div>
+        
+            <!-- convite para quem visita o portfólio ver o fluxo completo -->
+            <div class="demo-equipe">
+                <div>
+                    <h3>Veja a loja por dentro</h3>
+                    <p>Faça um pedido aqui e acompanhe a chegada dele no balcão, aberto em outra aba. PIN da demonstração: <strong>1234</strong>.</p>
+                </div>
+                <div class="demo-botoes">
+                    <a href="balcao.html" target="_blank" rel="noopener" class="botao-link">Abrir o balcão</a>
+                    <a href="lojista.html" target="_blank" rel="noopener" class="botao-link botao-contorno">Painel do lojista</a>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -158,6 +170,7 @@
         <ul id="lista-carrinho" class="lista-carrinho"></ul>
 
         <div class="carrinho-rodape" id="carrinho-rodape">
+            <div data-etapa="carrinho">
             <form class="cupom" id="form-cupom">
                 <label for="cupom" class="sr-only">Cupom de desconto</label>
                 <input id="cupom" type="text" placeholder="Cupom de desconto" autocomplete="off">
@@ -169,6 +182,7 @@
                 <label><input type="radio" name="entrega" value="retirada" checked> Retirar no balcão</label>
                 <label><input type="radio" name="entrega" value="entrega"> Entrega</label>
             </fieldset>
+            </div>
 
             <dl class="resumo">
                 <div><dt>Subtotal</dt><dd id="subtotal">R$ 0,00</dd></div>
@@ -177,8 +191,19 @@
                 <div class="resumo-total"><dt>Total</dt><dd id="total">R$ 0,00</dd></div>
             </dl>
 
-            <button id="finalizar-compra" class="botao-principal">Finalizar pedido</button>
-            <button id="limpar-carrinho" class="botao-texto">Esvaziar carrinho</button>
+            <div data-etapa="carrinho">
+                <button id="finalizar-compra" class="botao-principal">Finalizar pedido</button>
+                <button id="limpar-carrinho" class="botao-texto">Esvaziar carrinho</button>
+            </div>
+
+            <form id="form-checkout" class="checkout" hidden>
+                <p class="checkout-aviso">Loja de demonstração: use um nome fictício. Nada é cobrado.</p>
+                <label>Seu nome
+                    <input id="cliente-nome" name="nome" required minlength="2" maxlength="60" autocomplete="off">
+                </label>
+                <button type="submit" id="confirmar-pedido" class="botao-principal">Confirmar pedido</button>
+                <button type="button" id="voltar-carrinho" class="botao-texto">Voltar ao carrinho</button>
+            </form>
         </div>
     </aside>
 
@@ -187,7 +212,8 @@
         <p id="confirmacao-texto"></p>
         <ul id="confirmacao-itens"></ul>
         <p class="confirmacao-total" id="confirmacao-total"></p>
-        <button id="fechar-confirmacao" class="botao-principal">Continuar navegando</button>
+        <a id="acompanhar-pedido" class="botao-link" hidden>Acompanhar pedido</a>
+        <button id="fechar-confirmacao" class="botao-texto">Continuar navegando</button>
     </dialog>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -209,6 +235,9 @@
                 <a href="#sobre">Sobre</a>
                 <a href="#cardapio">Cardápio</a>
                 <a href="#contato">Contato</a>
+                <a href="pedido.html">Meus pedidos</a>
+                <a href="balcao.html">Balcão (equipe)</a>
+                <a href="lojista.html">Painel do lojista</a>
             </nav>
 
             <div class="rodape-coluna">
@@ -237,7 +266,7 @@
     <!-- CartBoost.AI: para testar, troque o src pela URL onde o pixel.js estiver servido e descomente -->
     <!-- <script defer src="http://localhost:5000/pixel.js" data-debug="true" data-store="0199ef7e-9143-4021-8408-639758805b31"></script> -->
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#010103">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/icone.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pedido.css">
+    <title>Meu pedido · Coffe Peace</title>
+</head>
+
+<body>
+    <header id="topo" class="rolado">
+        <div class="header-conteudo">
+            <a href="index.html" class="marca" aria-label="Coffe Peace — voltar à loja">
+                <img src="img/icone.svg" alt="" width="44" height="44">
+                <span>Coffe <strong>Peace</strong></span>
+            </a>
+            <a href="index.html#cardapio" class="botao-link botao-contorno voltar-loja">Voltar ao cardápio</a>
+        </div>
+    </header>
+
+    <main class="pagina-pedido">
+        <section>
+            <h2>Meu <span>pedido</span></h2>
+
+            <p class="pedido-mensagem" id="mensagem" hidden></p>
+
+            <article class="pedido-card" id="pedido" hidden>
+                <div class="pedido-topo">
+                    <div>
+                        <p class="pedido-numero" id="numero"></p>
+                        <p class="pedido-entrega" id="entrega"></p>
+                    </div>
+                    <p class="pedido-atualizado" id="atualizado" aria-live="polite"></p>
+                </div>
+
+                <ol class="linha-status" id="linha-status">
+                    <li data-status="recebido">Recebido</li>
+                    <li data-status="preparando">Preparando</li>
+                    <li data-status="pronto">Pronto</li>
+                    <li data-status="entregue">Entregue</li>
+                </ol>
+
+                <ul class="pedido-itens" id="itens"></ul>
+
+                <dl class="resumo">
+                    <div><dt>Subtotal</dt><dd id="subtotal"></dd></div>
+                    <div id="linha-desconto" hidden><dt>Desconto</dt><dd id="desconto"></dd></div>
+                    <div><dt>Frete</dt><dd id="frete"></dd></div>
+                    <div class="resumo-total"><dt>Total</dt><dd id="total"></dd></div>
+                </dl>
+            </article>
+
+            <div class="meus-pedidos" id="meus-pedidos" hidden>
+                <h3>Pedidos feitos neste navegador</h3>
+                <ul id="lista-pedidos"></ul>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/pedido.js"></script>
+</body>
+
+</html>
