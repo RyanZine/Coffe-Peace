@@ -1,5 +1,8 @@
 :root {
-  font-size: 10px;
+  /* Base de 10px que cresce em monitores grandes: tudo em rem acompanha a tela */
+  font-size: clamp(10px, 0.35vw + 5px, 15px);
+  --largura: 1800px;
+  --margem: clamp(2rem, 4vw, 8rem);
   --main-color: #d3ad7f;
   --main-escuro: #b8925f;
   --verde: #9cb87a;
@@ -75,9 +78,9 @@ div.mascara {
 }
 
 section {
-  padding: 6rem 2rem;
+  padding: 6rem var(--margem);
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: var(--largura);
 }
 
 section h2 {
@@ -111,10 +114,10 @@ header.rolado {
 }
 
 .header-conteudo {
-  max-width: 1200px;
+  max-width: var(--largura);
   height: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--margem);
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -431,6 +434,50 @@ section.caixa-principal p:not(.selo) {
   gap: 2rem;
 }
 
+/* 6 produtos fecham 2 linhas de 3 no desktop */
+@media (min-width: 1100px) {
+  .produtos {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.8rem;
+  }
+
+  section h2 {
+    font-size: 4.8rem;
+  }
+
+  section.caixa-principal > div {
+    max-width: 80rem;
+  }
+
+  section.caixa-principal h1 {
+    font-size: 7.6rem;
+  }
+
+  section.caixa-principal p:not(.selo) {
+    font-size: 2.2rem;
+  }
+
+  header nav a {
+    font-size: 1.7rem;
+  }
+
+  article.produto h3 {
+    font-size: 2.6rem;
+  }
+
+  .descricao {
+    font-size: 1.6rem;
+  }
+
+  .sobre-texto {
+    padding: 5rem;
+  }
+
+  .sobre-texto p {
+    font-size: 1.8rem;
+  }
+}
+
 article.produto {
   display: flex;
   flex-direction: column;
@@ -448,7 +495,7 @@ article.produto:hover {
 
 article.produto img {
   width: 100%;
-  height: 20rem;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   background-color: var(--black);
 }
@@ -848,7 +895,7 @@ button.add.no-carrinho:hover {
 footer {
   position: relative;
   background: linear-gradient(180deg, var(--card) 0%, var(--bg) 100%);
-  padding: 6rem 2rem 0;
+  padding: 6rem var(--margem) 0;
 }
 
 /* Filete dourado que separa o rodapé do vídeo de fundo */
@@ -863,7 +910,7 @@ footer::before {
 }
 
 .rodape-grade {
-  max-width: 1200px;
+  max-width: calc(var(--largura) - 2 * var(--margem));
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.3fr;
@@ -927,7 +974,7 @@ footer::before {
 }
 
 .rodape-base {
-  max-width: 1200px;
+  max-width: calc(var(--largura) - 2 * var(--margem));
   margin: 0 auto;
   padding: 2.4rem 0;
   border-top: var(--border);
