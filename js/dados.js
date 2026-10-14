@@ -14,6 +14,12 @@ const PRODUTOS_INICIAIS = [
     { id: "latte", nome: "Latte", categoria: "cafe", preco: 9, imagem: "img/latte.png", descricao: "Mais leite, sabor suave para qualquer hora.", disponivel: true },
     { id: "macchiato", nome: "Macchiato", categoria: "cafe", preco: 10, imagem: "img/macchiato.png", descricao: "Expresso marcado com espuma de leite.", disponivel: true },
     { id: "earl-grey", nome: "Chá Earl Grey", categoria: "cha", preco: 6, imagem: "img/cha.png", descricao: "Chá preto com bergamota para desacelerar.", disponivel: true },
+    { id: "cha-verde", nome: "Chá Verde", categoria: "cha", preco: 6, imagem: "img/cha_verde.png", descricao: "Leve e fresco, com notas herbais.", disponivel: true },
+    { id: "camomila", nome: "Camomila", categoria: "cha", preco: 6, imagem: "img/camomila.png", descricao: "Floral e suave, ideal para o fim do dia.", disponivel: true },
+    { id: "hibisco", nome: "Hibisco com Frutas Vermelhas", categoria: "cha", preco: 7, imagem: "img/hibisco.png", descricao: "Infusão rubi, levemente ácida e sem cafeína.", disponivel: true },
+    { id: "hortela", nome: "Hortelã", categoria: "cha", preco: 6, imagem: "img/hortela.png", descricao: "Refrescante, bom depois das refeições.", disponivel: true },
+    { id: "chai-latte", nome: "Chai Latte", categoria: "cha", preco: 10, imagem: "img/chai_latte.png", descricao: "Chá preto com especiarias e leite vaporizado.", disponivel: true },
+    { id: "matcha-latte", nome: "Matcha Latte", categoria: "cha", preco: 12, imagem: "img/matcha_latte.png", descricao: "Matcha batido com leite, cremoso e energizante.", disponivel: true },
 ];
 
 const PROXIMO_STATUS = { recebido: ["preparando", "cancelado"], preparando: ["pronto", "cancelado"], pronto: ["entregue"] };
@@ -30,13 +36,21 @@ function estadoInicial() {
     };
 }
 
+// Quem abriu a demonstração antes de o cardápio crescer recebe os produtos novos,
+// sem perder preços e esgotados que o lojista já mudou
+function comCatalogoNovo(estado) {
+    const ids = new Set(estado.produtos.map((p) => p.id));
+    PRODUTOS_INICIAIS.filter((p) => !ids.has(p.id)).forEach((p) => estado.produtos.push(copia(p)));
+    return estado;
+}
+
 // Sem armazenamento (aba anônima bloqueada), a demonstração vive só na memória da aba
 let memoria = null;
 
 function ler() {
     try {
         const salvo = JSON.parse(localStorage.getItem(CHAVE));
-        if (salvo && Array.isArray(salvo.produtos) && Array.isArray(salvo.pedidos)) return salvo;
+        if (salvo && Array.isArray(salvo.produtos) && Array.isArray(salvo.pedidos)) return comCatalogoNovo(salvo);
     } catch {
         // dado corrompido: recomeça a demonstração
     }

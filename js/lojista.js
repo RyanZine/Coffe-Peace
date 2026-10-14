@@ -4,7 +4,8 @@ import {
 } from "./dados.js";
 import { $, elemento, moeda, tentar, criarCartaoPedido, confirmarDuasVezes, ROTULO_STATUS } from "./ui.js";
 
-const IMAGENS = ["cafe_expresso.png", "cafe_mocha.png", "cappuccino.png", "latte.png", "macchiato.png", "cha.png"];
+const IMAGENS = ["cafe_expresso.png", "cafe_mocha.png", "cappuccino.png", "latte.png", "macchiato.png", "cha.png",
+    "cha_verde.png", "camomila.png", "hibisco.png", "hortela.png", "chai_latte.png", "matcha_latte.png"];
 let abaAtual = "resumo";
 
 // ---------- Entrada ----------
