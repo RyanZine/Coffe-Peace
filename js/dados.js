@@ -20,7 +20,19 @@ const PRODUTOS_INICIAIS = [
     { id: "hortela", nome: "Hortelã", categoria: "cha", preco: 6, imagem: "img/hortela.png", descricao: "Refrescante, bom depois das refeições.", disponivel: true },
     { id: "chai-latte", nome: "Chai Latte", categoria: "cha", preco: 10, imagem: "img/chai_latte.png", descricao: "Chá preto com especiarias e leite vaporizado.", disponivel: true },
     { id: "matcha-latte", nome: "Matcha Latte", categoria: "cha", preco: 12, imagem: "img/matcha_latte.png", descricao: "Matcha batido com leite, cremoso e energizante.", disponivel: true },
+    { id: "bolo-cenoura", nome: "Bolo de Cenoura", categoria: "bolo", preco: 9, imagem: "img/bolo_cenoura.png", descricao: "Fatia fofinha com cobertura de ganache.", disponivel: true },
+    { id: "bolo-chocolate", nome: "Bolo de Chocolate", categoria: "bolo", preco: 10, imagem: "img/bolo_chocolate.png", descricao: "Massa úmida e recheio cremoso de chocolate.", disponivel: true },
+    { id: "bolo-laranja", nome: "Bolo de Laranja", categoria: "bolo", preco: 8, imagem: "img/bolo_laranja.png", descricao: "Leve, cítrico, com calda de laranja.", disponivel: true },
+    { id: "pao-de-queijo", nome: "Pão de Queijo", categoria: "salgado", preco: 7, imagem: "img/pao_de_queijo.png", descricao: "Grande, casquinha crocante e miolo macio.", disponivel: true },
+    { id: "coxinha", nome: "Coxinha", categoria: "salgado", preco: 8, imagem: "img/coxinha.png", descricao: "Massa crocante e recheio de frango desfiado.", disponivel: true },
+    { id: "croissant", nome: "Croissant", categoria: "salgado", preco: 9, imagem: "img/croissant.png", descricao: "Folhado amanteigado, assado no dia.", disponivel: true },
+    { id: "empada", nome: "Empada de Frango", categoria: "salgado", preco: 8, imagem: "img/empada.png", descricao: "Massa que desmancha e frango temperado.", disponivel: true },
+    { id: "combo-manha", nome: "Combo Manhã", categoria: "combo", preco: 17, imagem: "img/combo_manha.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Laranja.", disponivel: true },
+    { id: "combo-tarde", nome: "Combo Tarde", categoria: "combo", preco: 18, imagem: "img/combo_tarde.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Cenoura.", disponivel: true },
+    { id: "combo-classico", nome: "Combo Clássico", categoria: "combo", preco: 19, imagem: "img/combo_classico.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Chocolate.", disponivel: true },
 ];
+
+export const CATEGORIAS = { cafe: "Café", cha: "Chá", bolo: "Bolo", salgado: "Salgado", combo: "Combo" };
 
 const PROXIMO_STATUS = { recebido: ["preparando", "cancelado"], preparando: ["pronto", "cancelado"], pronto: ["entregue"] };
 
@@ -205,7 +217,7 @@ export async function criarProduto({ nome, categoria, preco, imagem, descricao }
     if (id.length < 2) throw new Error("nome muito curto");
     if (estado.produtos.some((p) => p.id === id)) throw new Error("já existe um produto com esse nome");
     if (!(preco > 0 && preco < 1000)) throw new Error("preço deve ficar entre R$ 0,01 e R$ 999,99");
-    if (!["cafe", "cha"].includes(categoria)) throw new Error("categoria inválida");
+    if (!(categoria in CATEGORIAS)) throw new Error("categoria inválida");
     estado.produtos.push({ id, nome: nome.trim(), categoria, preco, imagem, descricao: (descricao || "").trim().slice(0, 160), disponivel: true });
     gravar(estado);
 }

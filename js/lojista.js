@@ -5,7 +5,8 @@ import {
 import { $, elemento, moeda, tentar, criarCartaoPedido, confirmarDuasVezes, ROTULO_STATUS } from "./ui.js";
 
 const IMAGENS = ["cafe_expresso.png", "cafe_mocha.png", "cappuccino.png", "latte.png", "macchiato.png", "cha.png",
-    "cha_verde.png", "camomila.png", "hibisco.png", "hortela.png", "chai_latte.png", "matcha_latte.png"];
+    "cha_verde.png", "camomila.png", "hibisco.png", "hortela.png", "chai_latte.png", "matcha_latte.png",
+    "bolo_cenoura.png", "bolo_chocolate.png", "bolo_laranja.png", "pao_de_queijo.png", "coxinha.png", "croissant.png", "empada.png", "combo_manha.png", "combo_tarde.png", "combo_classico.png"];
 let abaAtual = "resumo";
 
 // ---------- Entrada ----------

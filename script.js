@@ -1,4 +1,4 @@
-import { carregarProdutos, validarCupom, criarPedido, ouvirMudancas } from "./js/dados.js";
+import { carregarProdutos, validarCupom, criarPedido, ouvirMudancas, CATEGORIAS } from "./js/dados.js";
 
 // O cardápio vem da camada de dados: é o mesmo que o lojista edita no painel dele
 let PRODUTOS = [];
@@ -129,7 +129,7 @@ function criarCard(produto) {
         </div>`;
     card.querySelector("img").src = produto.imagem;
     card.querySelector("img").alt = produto.nome;
-    card.querySelector(".categoria").textContent = produto.categoria === "cha" ? "Chá" : "Café";
+    card.querySelector(".categoria").textContent = CATEGORIAS[produto.categoria] || produto.categoria;
     card.querySelector("h3").textContent = produto.nome;
     card.querySelector(".descricao").textContent = produto.descricao;
     card.querySelector(".preco").textContent = moeda.format(produto.preco);

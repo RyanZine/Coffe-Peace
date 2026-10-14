@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Coffe Peace: cafés artesanais e chás para cada momento do dia. Cardápio com filtro, carrinho com quantidades, cupom e entrega.">
+    <meta name="description" content="Coffe Peace: cafés artesanais, chás, bolos e salgados para cada momento do dia. Cardápio com filtro, carrinho com quantidades, cupom e entrega.">
     <meta name="author" content="Ryan Zinedine">
     <meta name="theme-color" content="#010103">
     <link rel="canonical" href="https://coffe-peace.vercel.app/">
@@ -12,13 +12,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://coffe-peace.vercel.app/">
     <meta property="og:title" content="Coffe Peace — Café, chá e calma">
-    <meta property="og:description" content="Cafés artesanais e chás para cada momento do dia. Monte seu pedido no cardápio online.">
+    <meta property="og:description" content="Cafés artesanais, chás, bolos e salgados para cada momento do dia. Monte seu pedido no cardápio online.">
     <meta property="og:image" content="https://coffe-peace.vercel.app/img/og-image.png">
     <meta property="og:locale" content="pt_BR">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Coffe Peace — Café, chá e calma">
-    <meta name="twitter:description" content="Cafés artesanais e chás para cada momento do dia. Monte seu pedido no cardápio online.">
+    <meta name="twitter:description" content="Cafés artesanais, chás, bolos e salgados para cada momento do dia. Monte seu pedido no cardápio online.">
     <meta name="twitter:image" content="https://coffe-peace.vercel.app/img/og-image.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,10 +87,10 @@
                 <div class="sobre-texto">
                     <h3>O que faz o nosso café especial</h3>
                     <p>A mistura entre um momento único e uma rotina agitada, sem perder o gosto, a qualidade e a energia que a cafeína pode proporcionar.</p>
-                    <p>Também apreciamos momentos de calma: nossos chás ajudam a desacelerar, relaxar e aproveitar o momento com a mente mais tranquila.</p>
+                    <p>Também apreciamos momentos de calma: nossos chás ajudam a desacelerar, relaxar e aproveitar o momento com a mente mais tranquila. E para acompanhar, bolos caseiros e salgados assados no dia.</p>
                     <ul class="destaques">
                         <li><strong>100%</strong> grãos arábica</li>
-                        <li><strong>6</strong> bebidas no cardápio</li>
+                        <li><strong>22</strong> opções no cardápio</li>
                         <li><strong>15 min</strong> para retirada</li>
                     </ul>
                     <a href="#contato" class="botao-link">Saiba mais</a>
@@ -106,16 +106,19 @@
                     <button class="filtro ativo" data-categoria="todos" aria-pressed="true">Todos</button>
                     <button class="filtro" data-categoria="cafe" aria-pressed="false">Cafés</button>
                     <button class="filtro" data-categoria="cha" aria-pressed="false">Chás</button>
+                    <button class="filtro" data-categoria="bolo" aria-pressed="false">Bolos</button>
+                    <button class="filtro" data-categoria="salgado" aria-pressed="false">Salgados</button>
+                    <button class="filtro" data-categoria="combo" aria-pressed="false">Combos</button>
                 </div>
                 <label class="busca">
                     <span class="sr-only">Buscar no cardápio</span>
-                    <input id="busca" type="search" placeholder="Buscar bebida..." autocomplete="off">
+                    <input id="busca" type="search" placeholder="Buscar no cardápio..." autocomplete="off">
                 </label>
             </div>
 
             <!-- cards gerados pelo script.js a partir da lista PRODUTOS -->
             <div class="produtos" id="produtos"></div>
-            <p class="sem-resultado" id="sem-resultado" hidden>Nenhuma bebida encontrada.</p>
+            <p class="sem-resultado" id="sem-resultado" hidden>Nada encontrado com essa busca.</p>
         </section>
 
         <section class="contato" id="contato">
@@ -225,7 +228,7 @@
                     <img src="img/icone.svg" alt="" width="40" height="40">
                     <span>Coffe <strong>Peace</strong></span>
                 </a>
-                <p>Energia para a rotina, calma para desacelerar. Cafés artesanais e chás preparados na hora.</p>
+                <p>Energia para a rotina, calma para desacelerar. Cafés artesanais, chás, bolos e salgados feitos no dia.</p>
                 <a href="#cardapio" class="botao-link">Fazer pedido</a>
             </div>
 

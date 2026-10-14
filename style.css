@@ -389,6 +389,7 @@ section.caixa-principal p:not(.selo) {
 
 .filtros {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
