@@ -30,6 +30,18 @@ const PRODUTOS_INICIAIS = [
     { id: "combo-manha", nome: "Combo Manhã", categoria: "combo", preco: 17, imagem: "img/combo_manha.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Laranja.", disponivel: true },
     { id: "combo-tarde", nome: "Combo Tarde", categoria: "combo", preco: 18, imagem: "img/combo_tarde.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Cenoura.", disponivel: true },
     { id: "combo-classico", nome: "Combo Clássico", categoria: "combo", preco: 19, imagem: "img/combo_classico.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-energia", nome: "Combo Energia", categoria: "combo", preco: 26, imagem: "img/combo_energia.png", descricao: "Coxinha + Bolo de Chocolate + Matcha Latte.", disponivel: true },
+    { id: "combo-leveza", nome: "Combo Leveza", categoria: "combo", preco: 21, imagem: "img/combo_leveza.png", descricao: "Empada de Frango + Bolo de Chocolate + Chá Verde.", disponivel: true },
+    { id: "combo-brunch", nome: "Combo Brunch", categoria: "combo", preco: 23, imagem: "img/combo_brunch.png", descricao: "Croissant + Bolo de Laranja + Macchiato.", disponivel: true },
+    { id: "combo-frescor", nome: "Combo Frescor", categoria: "combo", preco: 21, imagem: "img/combo_frescor.png", descricao: "Croissant + Bolo de Cenoura + Hortelã.", disponivel: true },
+    { id: "combo-citrico", nome: "Combo Cítrico", categoria: "combo", preco: 13, imagem: "img/combo_citrico.png", descricao: "Hibisco + Bolo de Laranja.", disponivel: true },
+    { id: "combo-chocolate", nome: "Combo Chocolate", categoria: "combo", preco: 14, imagem: "img/combo_chocolate.png", descricao: "Café Mocha + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-contraste", nome: "Combo Contraste", categoria: "combo", preco: 13, imagem: "img/combo_contraste.png", descricao: "Café Mocha + Bolo de Laranja.", disponivel: true },
+    { id: "combo-especiarias", nome: "Combo Especiarias", categoria: "combo", preco: 17, imagem: "img/combo_especiarias.png", descricao: "Chai Latte + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-rubi", nome: "Combo Rubi", categoria: "combo", preco: 13, imagem: "img/combo_rubi.png", descricao: "Hibisco + Coxinha.", disponivel: true },
+    { id: "combo-aconchego", nome: "Combo Aconchego", categoria: "combo", preco: 15, imagem: "img/combo_aconchego.png", descricao: "Chai Latte + Empada de Frango.", disponivel: true },
+    { id: "combo-rapido", nome: "Combo Rápido", categoria: "combo", preco: 11, imagem: "img/combo_rapido.png", descricao: "Café Expresso + Empada de Frango.", disponivel: true },
+    { id: "combo-lanche", nome: "Combo Lanche", categoria: "combo", preco: 14, imagem: "img/combo_lanche.png", descricao: "Latte + Coxinha.", disponivel: true },
 ];
 
 export const CATEGORIAS = { cafe: "Café", cha: "Chá", bolo: "Bolo", salgado: "Salgado", combo: "Combo" };
