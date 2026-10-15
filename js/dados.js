@@ -12,7 +12,37 @@ const PRODUTOS_INICIAIS = [
     { id: "latte", nome: "Latte", categoria: "cafe", preco: 9, imagem: "img/latte.png", descricao: "Mais leite, sabor suave para qualquer hora.", disponivel: true },
     { id: "macchiato", nome: "Macchiato", categoria: "cafe", preco: 10, imagem: "img/macchiato.png", descricao: "Expresso marcado com espuma de leite.", disponivel: true },
     { id: "earl-grey", nome: "Chá Earl Grey", categoria: "cha", preco: 6, imagem: "img/cha.png", descricao: "Chá preto com bergamota para desacelerar.", disponivel: true },
+    { id: "cha-verde", nome: "Chá Verde", categoria: "cha", preco: 6, imagem: "img/cha_verde.png", descricao: "Leve e fresco, com notas herbais.", disponivel: true },
+    { id: "camomila", nome: "Camomila", categoria: "cha", preco: 6, imagem: "img/camomila.png", descricao: "Floral e suave, ideal para o fim do dia.", disponivel: true },
+    { id: "hibisco", nome: "Hibisco com Frutas Vermelhas", categoria: "cha", preco: 7, imagem: "img/hibisco.png", descricao: "Infusão rubi, levemente ácida e sem cafeína.", disponivel: true },
+    { id: "hortela", nome: "Hortelã", categoria: "cha", preco: 6, imagem: "img/hortela.png", descricao: "Refrescante, bom depois das refeições.", disponivel: true },
+    { id: "chai-latte", nome: "Chai Latte", categoria: "cha", preco: 10, imagem: "img/chai_latte.png", descricao: "Chá preto com especiarias e leite vaporizado.", disponivel: true },
+    { id: "matcha-latte", nome: "Matcha Latte", categoria: "cha", preco: 12, imagem: "img/matcha_latte.png", descricao: "Matcha batido com leite, cremoso e energizante.", disponivel: true },
+    { id: "bolo-cenoura", nome: "Bolo de Cenoura", categoria: "bolo", preco: 9, imagem: "img/bolo_cenoura.png", descricao: "Fatia fofinha com cobertura de ganache.", disponivel: true },
+    { id: "bolo-chocolate", nome: "Bolo de Chocolate", categoria: "bolo", preco: 10, imagem: "img/bolo_chocolate.png", descricao: "Massa úmida e recheio cremoso de chocolate.", disponivel: true },
+    { id: "bolo-laranja", nome: "Bolo de Laranja", categoria: "bolo", preco: 8, imagem: "img/bolo_laranja.png", descricao: "Leve, cítrico, com calda de laranja.", disponivel: true },
+    { id: "pao-de-queijo", nome: "Pão de Queijo", categoria: "salgado", preco: 7, imagem: "img/pao_de_queijo.png", descricao: "Grande, casquinha crocante e miolo macio.", disponivel: true },
+    { id: "coxinha", nome: "Coxinha", categoria: "salgado", preco: 8, imagem: "img/coxinha.png", descricao: "Massa crocante e recheio de frango desfiado.", disponivel: true },
+    { id: "croissant", nome: "Croissant", categoria: "salgado", preco: 9, imagem: "img/croissant.png", descricao: "Folhado amanteigado, assado no dia.", disponivel: true },
+    { id: "empada", nome: "Empada de Frango", categoria: "salgado", preco: 8, imagem: "img/empada.png", descricao: "Massa que desmancha e frango temperado.", disponivel: true },
+    { id: "combo-manha", nome: "Combo Manhã", categoria: "combo", preco: 17, imagem: "img/combo_manha.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Laranja.", disponivel: true },
+    { id: "combo-tarde", nome: "Combo Tarde", categoria: "combo", preco: 18, imagem: "img/combo_tarde.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Cenoura.", disponivel: true },
+    { id: "combo-classico", nome: "Combo Clássico", categoria: "combo", preco: 19, imagem: "img/combo_classico.png", descricao: "Café Expresso + Pão de Queijo + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-energia", nome: "Combo Energia", categoria: "combo", preco: 26, imagem: "img/combo_energia.png", descricao: "Coxinha + Bolo de Chocolate + Matcha Latte.", disponivel: true },
+    { id: "combo-leveza", nome: "Combo Leveza", categoria: "combo", preco: 21, imagem: "img/combo_leveza.png", descricao: "Empada de Frango + Bolo de Chocolate + Chá Verde.", disponivel: true },
+    { id: "combo-brunch", nome: "Combo Brunch", categoria: "combo", preco: 23, imagem: "img/combo_brunch.png", descricao: "Croissant + Bolo de Laranja + Macchiato.", disponivel: true },
+    { id: "combo-frescor", nome: "Combo Frescor", categoria: "combo", preco: 21, imagem: "img/combo_frescor.png", descricao: "Croissant + Bolo de Cenoura + Hortelã.", disponivel: true },
+    { id: "combo-citrico", nome: "Combo Cítrico", categoria: "combo", preco: 13, imagem: "img/combo_citrico.png", descricao: "Hibisco + Bolo de Laranja.", disponivel: true },
+    { id: "combo-chocolate", nome: "Combo Chocolate", categoria: "combo", preco: 14, imagem: "img/combo_chocolate.png", descricao: "Café Mocha + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-contraste", nome: "Combo Contraste", categoria: "combo", preco: 13, imagem: "img/combo_contraste.png", descricao: "Café Mocha + Bolo de Laranja.", disponivel: true },
+    { id: "combo-especiarias", nome: "Combo Especiarias", categoria: "combo", preco: 17, imagem: "img/combo_especiarias.png", descricao: "Chai Latte + Bolo de Chocolate.", disponivel: true },
+    { id: "combo-rubi", nome: "Combo Rubi", categoria: "combo", preco: 13, imagem: "img/combo_rubi.png", descricao: "Hibisco + Coxinha.", disponivel: true },
+    { id: "combo-aconchego", nome: "Combo Aconchego", categoria: "combo", preco: 15, imagem: "img/combo_aconchego.png", descricao: "Chai Latte + Empada de Frango.", disponivel: true },
+    { id: "combo-rapido", nome: "Combo Rápido", categoria: "combo", preco: 11, imagem: "img/combo_rapido.png", descricao: "Café Expresso + Empada de Frango.", disponivel: true },
+    { id: "combo-lanche", nome: "Combo Lanche", categoria: "combo", preco: 14, imagem: "img/combo_lanche.png", descricao: "Latte + Coxinha.", disponivel: true },
 ];
+
+export const CATEGORIAS = { cafe: "Café", cha: "Chá", bolo: "Bolo", salgado: "Salgado", combo: "Combo" };
 
 const PROXIMO_STATUS = { recebido: ["preparando", "cancelado"], preparando: ["pronto", "cancelado"], pronto: ["entregue"] };
 
@@ -28,13 +58,21 @@ function estadoInicial() {
     };
 }
 
+// Quem abriu a demonstração antes de o cardápio crescer recebe os produtos novos,
+// sem perder preços e esgotados que o lojista já mudou
+function comCatalogoNovo(estado) {
+    const ids = new Set(estado.produtos.map((p) => p.id));
+    PRODUTOS_INICIAIS.filter((p) => !ids.has(p.id)).forEach((p) => estado.produtos.push(copia(p)));
+    return estado;
+}
+
 // Sem armazenamento (aba anônima bloqueada), a demonstração vive só na memória da aba
 let memoria = null;
 
 function ler() {
     try {
         const salvo = JSON.parse(localStorage.getItem(CHAVE));
-        if (salvo && Array.isArray(salvo.produtos) && Array.isArray(salvo.pedidos)) return salvo;
+        if (salvo && Array.isArray(salvo.produtos) && Array.isArray(salvo.pedidos)) return comCatalogoNovo(salvo);
     } catch {
         // dado corrompido: recomeça a demonstração
     }
@@ -189,7 +227,7 @@ export async function criarProduto({ nome, categoria, preco, imagem, descricao }
     if (id.length < 2) throw new Error("nome muito curto");
     if (estado.produtos.some((p) => p.id === id)) throw new Error("já existe um produto com esse nome");
     if (!(preco > 0 && preco < 1000)) throw new Error("preço deve ficar entre R$ 0,01 e R$ 999,99");
-    if (!["cafe", "cha"].includes(categoria)) throw new Error("categoria inválida");
+    if (!(categoria in CATEGORIAS)) throw new Error("categoria inválida");
     estado.produtos.push({ id, nome: nome.trim(), categoria, preco, imagem, descricao: (descricao || "").trim().slice(0, 160), disponivel: true });
     gravar(estado);
 }
