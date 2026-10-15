@@ -177,7 +177,7 @@ As duas versões usam a **mesma lista de funções** em `js/dados.js`. A branch 
 ```bash
 git clone https://github.com/RyanZine/Coffe-Peace.git
 cd Coffe-Peace
-python -m http.server 5500
+python3 -m http.server 5500   # no Windows: python -m http.server 5500
 ```
 
 * Loja: **http://localhost:5500**
