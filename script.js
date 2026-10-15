@@ -5,8 +5,6 @@ let PRODUTOS = [];
 
 // Só para migrar carrinhos antigos, que guardavam apenas o código do cupom
 const CUPONS_ANTIGOS = { PEACE10: 0.1 };
-const TAXA_ENTREGA = 5;
-const FRETE_GRATIS_A_PARTIR = 40;
 const CHAVE = "carrinho-v2";
 
 const moeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -43,7 +41,6 @@ function sanitizar(salvo) {
     return {
         itens,
         cupom: cupomValido(salvo.cupom),
-        entrega: salvo.entrega === "entrega" ? "entrega" : "retirada",
     };
 }
 
@@ -70,16 +67,8 @@ function calcularTotais() {
     const subtotal = Object.entries(estado.itens)
         .reduce((soma, [id, qtd]) => soma + (buscarProduto(id)?.preco || 0) * qtd, 0);
     const desconto = estado.cupom ? subtotal * estado.cupom.percentual : 0;
-    const comDesconto = subtotal - desconto;
-    const frete = estado.entrega === "entrega" && comDesconto > 0 && comDesconto < FRETE_GRATIS_A_PARTIR ? TAXA_ENTREGA : 0;
     const quantidade = Object.values(estado.itens).reduce((soma, qtd) => soma + qtd, 0);
-    return { subtotal, desconto, frete, total: comDesconto + frete, quantidade };
-}
-
-// ---------- Integração CartBoost.AI ----------
-// O pixel é opcional: sem a linha do <script> no index.html, nada é enviado
-function rastrear(evento, payload) {
-    window.CartBoost?.track(evento, payload);
+    return { subtotal, desconto, total: subtotal - desconto, quantidade };
 }
 
 // ---------- Toast ----------
@@ -137,6 +126,9 @@ function criarCard(produto) {
 
     const botao = card.querySelector(".add");
     botao.dataset.id = produto.id;
+    // o pixel do CartBoost lê estes atributos no clique e registra o produto visto
+    botao.dataset.cbProduto = produto.id;
+    botao.dataset.cbCategoria = produto.categoria;
     atualizarBotaoAdicionar(botao);
     return card;
 }
@@ -156,15 +148,6 @@ gradeProdutos.addEventListener("click", (evento) => {
     const produto = buscarProduto(botao.dataset.id);
     alterarQuantidade(produto.id, 1);
     mostrarToast(`${produto.nome} adicionado ao carrinho`);
-    // view_product abre a janela de recuperação de carrinho no CartBoost
-    rastrear("view_product", {
-        product_id: produto.id,
-        name: produto.nome,
-        category: produto.categoria,
-        price: produto.preco,
-        quantidade: estado.itens[produto.id],
-        carrinho_total: calcularTotais().total,
-    });
 });
 
 document.querySelectorAll(".filtro").forEach((filtro) => {
@@ -195,7 +178,7 @@ function atualizarCarrinho() {
     const ids = Object.keys(estado.itens).filter(buscarProduto);
     lista.replaceChildren(...ids.map((id) => criarItemCarrinho(buscarProduto(id), estado.itens[id])));
 
-    const { subtotal, desconto, frete, total, quantidade } = calcularTotais();
+    const { subtotal, desconto, total, quantidade } = calcularTotais();
     const vazio = quantidade === 0;
 
     document.getElementById("carrinho-vazio").hidden = !vazio;
@@ -209,10 +192,8 @@ function atualizarCarrinho() {
     document.getElementById("subtotal").textContent = moeda.format(subtotal);
     document.getElementById("linha-desconto").hidden = desconto === 0;
     document.getElementById("desconto").textContent = `- ${moeda.format(desconto)}`;
-    document.getElementById("frete").textContent = frete ? moeda.format(frete) : "Grátis";
     document.getElementById("total").textContent = moeda.format(total);
     document.getElementById("cupom").value = estado.cupom?.codigo || "";
-    document.querySelector(`input[name="entrega"][value="${estado.entrega}"]`).checked = true;
 
     document.querySelectorAll(".add").forEach(atualizarBotaoAdicionar);
 }
@@ -281,14 +262,6 @@ async function buscarPercentual(codigo) {
         return null;
     }
 }
-
-document.querySelectorAll('input[name="entrega"]').forEach((opcao) => {
-    opcao.addEventListener("change", () => {
-        estado.entrega = opcao.value;
-        salvarEstado();
-        atualizarCarrinho();
-    });
-});
 
 document.getElementById("limpar-carrinho").addEventListener("click", () => {
     estado.itens = {};
@@ -374,8 +347,6 @@ document.getElementById("finalizar-compra").addEventListener("click", () => {
     const totais = calcularTotais();
     if (totais.quantidade === 0) return mostrarToast("Seu carrinho está vazio!");
     mostrarEtapa(true);
-    // begin_checkout: o visitante chegou ao formulário, o abandono daqui pesa mais
-    rastrear("begin_checkout", { itens: Object.keys(estado.itens), valor: Number(totais.total.toFixed(2)) });
 });
 
 document.getElementById("voltar-carrinho").addEventListener("click", () => mostrarEtapa(false));
@@ -383,7 +354,10 @@ document.getElementById("voltar-carrinho").addEventListener("click", () => mostr
 formCheckout.addEventListener("submit", async (evento) => {
     evento.preventDefault();
     const botao = document.getElementById("confirmar-pedido");
-    const cliente = { nome: document.getElementById("cliente-nome").value.trim() };
+    const cliente = {
+        nome: document.getElementById("cliente-nome").value.trim(),
+        email: document.getElementById("cliente-email").value.trim(),
+    };
 
     botao.disabled = true;
     botao.textContent = "Enviando...";
@@ -399,18 +373,17 @@ formCheckout.addEventListener("submit", async (evento) => {
 });
 
 // O banco recalcula o total com os próprios preços; daqui só vão ids e quantidades
-function enviarPedido({ nome }) {
+function enviarPedido({ nome, email }) {
     return criarPedido({
         itens: Object.entries(estado.itens).map(([id, quantidade]) => ({ id, quantidade })),
-        entrega: estado.entrega,
         cupom: estado.cupom?.codigo || null,
         nome,
+        email,
     });
 }
 
 function confirmarPedido(pedido) {
-    const recebimento = estado.entrega === "entrega" ? "Seu pedido sai para entrega em breve" : "Retire no balcão em até 15 minutos";
-    document.getElementById("confirmacao-texto").textContent = `Pedido nº ${pedido.numero}. ${recebimento}.`;
+    document.getElementById("confirmacao-texto").textContent = `Pedido nº ${pedido.numero}. Retire no balcão em até 15 minutos.`;
     document.getElementById("confirmacao-itens").replaceChildren(...Object.entries(estado.itens).map(([id, qtd]) => {
         const li = document.createElement("li");
         li.textContent = `${qtd}× ${buscarProduto(id).nome}`;
@@ -425,12 +398,12 @@ function confirmarPedido(pedido) {
         lembrarPedido(pedido);
     }
 
-    // checkout_completed marca a conversão e cancela a mensagem de recuperação
-    rastrear("checkout_completed", {
+    // Única chamada ao CartBoost no código: a compra tira o cliente da lista de abandonos.
+    // Sem o pixel na página, o ?. faz a linha não fazer nada
+    window.CartBoost?.track("checkout_completed", {
         pedido: pedido.numero,
         valor: Number(pedido.total.toFixed(2)),
         itens: Object.keys(estado.itens),
-        entrega: estado.entrega,
         cupom: estado.cupom?.codigo || null,
     });
 
@@ -457,9 +430,6 @@ function lembrarPedido({ numero, codigo }) {
 
 document.getElementById("fechar-confirmacao").addEventListener("click", () => dialogo.close());
 
-// O pixel carrega depois deste script; ele só mede quais campos foram preenchidos, nunca os valores
-addEventListener("load", () => window.CartBoost?.trackForm?.("#form-checkout", "checkout"));
-
 // ---------- Cardápio ----------
 async function sincronizarCardapio() {
     try {
@@ -477,4 +447,13 @@ async function sincronizarCardapio() {
 
 // Lojista mudou preço ou o balcão marcou esgotado em outra aba: a vitrine atualiza sozinha
 ouvirMudancas(sincronizarCardapio);
-sincronizarCardapio();
+sincronizarCardapio().then(abrirCarrinhoDoLink);
+
+// O e-mail de recuperação do CartBoost traz ?carrinho=1: o cliente volta direto para o carrinho que deixou
+function abrirCarrinhoDoLink() {
+    const url = new URL(location.href);
+    if (url.searchParams.get("carrinho") !== "1") return;
+    url.searchParams.delete("carrinho");
+    history.replaceState(null, "", url);
+    if (calcularTotais().quantidade > 0) abrirCarrinho();
+}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Coffe Peace: cafés artesanais e chás para cada momento do dia. Cardápio com filtro, carrinho com quantidades, cupom e entrega.">
+    <meta name="description" content="Coffe Peace: cafés artesanais e chás para cada momento do dia. Cardápio com filtro, carrinho com quantidades, cupom e retirada no balcão.">
     <meta name="author" content="Ryan Zinedine">
     <meta name="theme-color" content="#010103">
     <link rel="canonical" href="https://coffe-peace.vercel.app/">
@@ -131,8 +131,8 @@
                     <p>Pedido pronto em até 15 minutos no balcão, sem taxa.</p>
                 </article>
                 <article>
-                    <h3>Entrega</h3>
-                    <p>R$ 5,00 na região, grátis em pedidos a partir de R$ 40,00.</p>
+                    <h3>Pedido online</h3>
+                    <p>Peça pelo site e acompanhe cada etapa até ficar pronto.</p>
                 </article>
                 <article>
                     <h3>Primeira compra?</h3>
@@ -177,17 +177,12 @@
                 <button type="submit">Aplicar</button>
             </form>
 
-            <fieldset class="entrega">
-                <legend class="sr-only">Forma de recebimento</legend>
-                <label><input type="radio" name="entrega" value="retirada" checked> Retirar no balcão</label>
-                <label><input type="radio" name="entrega" value="entrega"> Entrega</label>
-            </fieldset>
+            <p class="retirada-aviso">Retirada no balcão, pronto em até 15 minutos.</p>
             </div>
 
             <dl class="resumo">
                 <div><dt>Subtotal</dt><dd id="subtotal">R$ 0,00</dd></div>
                 <div id="linha-desconto" hidden><dt>Desconto</dt><dd id="desconto">- R$ 0,00</dd></div>
-                <div><dt>Frete</dt><dd id="frete">Grátis</dd></div>
                 <div class="resumo-total"><dt>Total</dt><dd id="total">R$ 0,00</dd></div>
             </dl>
 
@@ -201,6 +196,12 @@
                 <label>Seu nome
                     <input id="cliente-nome" name="nome" required minlength="2" maxlength="60" autocomplete="off">
                 </label>
+                <label>Seu e-mail
+                    <input id="cliente-email" name="email" type="email" required maxlength="120" autocomplete="email">
+                </label>
+                <!-- o pixel do CartBoost lê o e-mail ao sair do campo, antes do envio: por isso o aviso fica aqui -->
+                <p class="checkout-consentimento">Usamos seu e-mail para avisar sobre o pedido e para lembrar você
+                    de itens que ficarem no carrinho.</p>
                 <button type="submit" id="confirmar-pedido" class="botao-principal">Confirmar pedido</button>
                 <button type="button" id="voltar-carrinho" class="botao-texto">Voltar ao carrinho</button>
             </form>
@@ -249,7 +250,7 @@
             <div class="rodape-coluna">
                 <h3>Pedidos</h3>
                 <p>Retirada em até 15 min</p>
-                <p>Entrega grátis acima de R$ 40</p>
+                <p>Acompanhe o pedido pelo site</p>
                 <p>Cupom <strong>PEACE10</strong> na primeira compra</p>
             </div>
         </div>
@@ -263,8 +264,9 @@
         </div>
     </footer>
 
-    <!-- CartBoost.AI: para testar, troque o src pela URL onde o pixel.js estiver servido e descomente -->
-    <!-- <script defer src="http://localhost:5000/pixel.js" data-debug="true" data-store="0199ef7e-9143-4021-8408-639758805b31"></script> -->
+    <!-- CartBoost.AI (POC, branch integracao/coffe-peace): exige a POC em localhost:3000 e a loja em localhost:5500.
+         O pixel lê sozinho o e-mail (input type=email) e os produtos (data-cb-produto nos botões) -->
+    <script src="http://localhost:3000/pixel.js" defer></script>
 
     <script type="module" src="script.js"></script>
 </body>

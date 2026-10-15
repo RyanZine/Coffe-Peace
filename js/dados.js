@@ -3,8 +3,6 @@
 // supabase-cartboost troca este arquivo pela versão com banco real, mantendo a mesma lista de funções.
 
 const CHAVE = "coffe-peace-demo";
-const TAXA_ENTREGA = 5;
-const FRETE_GRATIS_A_PARTIR = 40;
 const PIN_PADRAO = "1234";
 
 const PRODUTOS_INICIAIS = [
@@ -77,12 +75,14 @@ export async function validarCupom(codigo) {
     return cupom ? cupom.percentual : null;
 }
 
-// Mesmas regras da função criar_pedido do banco: o total sai dos preços cadastrados, nunca do carrinho
-export async function criarPedido({ itens, entrega, cupom, nome }) {
+// Mesmas regras da função criar_pedido do banco: o total sai dos preços cadastrados, nunca do carrinho.
+// A cafeteria trabalha só com retirada no balcão, então não há frete
+export async function criarPedido({ itens, cupom, nome, email }) {
     const estado = ler();
     const nomeLimpo = String(nome || "").trim();
+    const emailLimpo = String(email || "").trim().toLowerCase();
     if (nomeLimpo.length < 2 || nomeLimpo.length > 60) throw new Error("informe um nome de 2 a 60 letras");
-    if (!["retirada", "entrega"].includes(entrega)) throw new Error("forma de recebimento inválida");
+    if (emailLimpo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailLimpo)) throw new Error("e-mail inválido");
     if (!itens.length || itens.length > 20) throw new Error("o pedido precisa ter de 1 a 20 produtos");
 
     const linhas = itens.map(({ id, quantidade }) => {
@@ -101,7 +101,6 @@ export async function criarPedido({ itens, entrega, cupom, nome }) {
 
     const subtotal = linhas.reduce((soma, l) => soma + l.preco_unitario * l.quantidade, 0);
     const desconto = Math.round(subtotal * percentual * 100) / 100;
-    const frete = entrega === "entrega" && subtotal - desconto < FRETE_GRATIS_A_PARTIR ? TAXA_ENTREGA : 0;
     const agora = new Date().toISOString();
 
     const pedido = {
@@ -112,25 +111,24 @@ export async function criarPedido({ itens, entrega, cupom, nome }) {
         atualizado_em: agora,
         status: "recebido",
         cliente_nome: nomeLimpo,
-        entrega,
+        cliente_email: emailLimpo || null,
         cupom: cupom || null,
         subtotal,
         desconto,
-        frete,
-        total: subtotal - desconto + frete,
+        total: subtotal - desconto,
         itens: linhas,
     };
     estado.pedidos.push(pedido);
     gravar(estado);
-    return { numero: pedido.id, codigo: pedido.codigo, status: pedido.status, subtotal, desconto, frete, total: pedido.total };
+    return { numero: pedido.id, codigo: pedido.codigo, status: pedido.status, subtotal, desconto, total: pedido.total };
 }
 
 // O acompanhamento não devolve o nome do cliente, como no banco
 export async function consultarPedido(codigo) {
     const pedido = ler().pedidos.find((p) => p.codigo === codigo);
     if (!pedido) return null;
-    const { id, status, entrega, criado_em, atualizado_em, subtotal, desconto, frete, total, itens } = pedido;
-    return { numero: id, status, entrega, criado_em, atualizado_em, subtotal, desconto, frete, total, itens };
+    const { id, status, criado_em, atualizado_em, subtotal, desconto, total, itens } = pedido;
+    return { numero: id, status, criado_em, atualizado_em, subtotal, desconto, total, itens };
 }
 
 // ---------- Balcão (funcionário) ----------

@@ -287,10 +287,6 @@ body {
   color: var(--verde);
 }
 
-.etiqueta-entrega {
-  background-color: rgba(211, 173, 127, 0.15);
-  color: var(--main-color);
-}
 
 .cartao-acoes {
   display: flex;

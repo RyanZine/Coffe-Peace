@@ -812,23 +812,10 @@ button.add.no-carrinho:hover {
   background-color: rgba(211, 173, 127, 0.15);
 }
 
-.entrega {
-  display: flex;
-  gap: 2rem;
-  border: none;
-  margin: 1.6rem 0;
+.retirada-aviso {
+  margin: 1.4rem 0;
   font-size: 1.4rem;
-}
-
-.entrega label {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
-}
-
-.entrega input {
-  accent-color: var(--main-color);
+  color: var(--verde);
 }
 
 .resumo div {
@@ -913,6 +900,13 @@ button.add.no-carrinho:hover {
 .checkout .botao-principal:disabled {
   opacity: 0.6;
   cursor: wait;
+}
+
+.checkout-consentimento {
+  margin-top: -0.6rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--texto-suave);
 }
 
 [data-etapa="carrinho"][hidden] {

@@ -18,7 +18,6 @@ function mostrarMensagem(texto) {
 function renderizar(pedido) {
     $("pedido").hidden = false;
     $("numero").textContent = `Pedido nº ${pedido.numero}`;
-    $("entrega").textContent = pedido.entrega === "entrega" ? "Entrega na região" : "Retirada no balcão";
     $("atualizado").textContent = `Atualizado às ${hora.format(new Date())}`;
 
     const cancelado = pedido.status === "cancelado";
@@ -42,7 +41,6 @@ function renderizar(pedido) {
     $("subtotal").textContent = moeda.format(pedido.subtotal);
     $("linha-desconto").hidden = Number(pedido.desconto) === 0;
     $("desconto").textContent = `- ${moeda.format(pedido.desconto)}`;
-    $("frete").textContent = Number(pedido.frete) ? moeda.format(pedido.frete) : "Grátis";
     $("total").textContent = moeda.format(pedido.total);
 
     return ["entregue", "cancelado"].includes(pedido.status);

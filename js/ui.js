@@ -48,6 +48,7 @@ export function criarCartaoPedido(pedido, acoes = []) {
     const topo = elemento("div", "cartao-topo");
     topo.append(elemento("strong", "", `#${pedido.id}`), elemento("span", "", hora.format(new Date(pedido.criado_em))));
     li.append(topo, elemento("p", "cliente", pedido.cliente_nome));
+    if (pedido.cliente_email) li.append(elemento("p", "contato", pedido.cliente_email));
 
     const itens = elemento("ul", "itens");
     pedido.itens.forEach((item) => itens.append(elemento("li", "", `${item.quantidade}× ${item.nome}`)));
@@ -55,7 +56,7 @@ export function criarCartaoPedido(pedido, acoes = []) {
 
     const rodape = elemento("div", "cartao-rodape");
     rodape.append(
-        elemento("span", `etiqueta etiqueta-${pedido.entrega}`, pedido.entrega === "entrega" ? "Entrega" : "Retirada"),
+        elemento("span", "etiqueta etiqueta-retirada", "Retirada"),
         elemento("strong", "", moeda.format(pedido.total)),
     );
     li.append(rodape);
